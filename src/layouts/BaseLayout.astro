@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Russ Designs',
+  description = 'Portfolio of instructional design, learning architecture, technical communication, and software development work by Russ.',
+} = Astro.props;
+
+const pageTitle =
+  title === 'Russ Designs'
+    ? title
+    : `${title} | Russ Designs`;
+
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <meta name="description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{pageTitle}</title>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">
+      Skip to main content
+    </a>
+
+    <header class="site-header">
+      <div class="container header-content">
+        <a class="site-name" href="/">
+          Russ Designs
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul class="navigation">
+            <li><a href="/">Home</a></li>
+            <li><a href="/portfolio/">Portfolio</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/resume/">Resume</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© {currentYear} Russ Designs</p>
+
+        <p>
+          Built with Astro and hosted on GitHub Pages.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    min-height: 4.5rem;
+  }
+
+  .site-name {
+    color: var(--color-text);
+    font-size: 1.15rem;
+    font-weight: 750;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .navigation a {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .navigation a:hover {
+    color: var(--color-accent);
+  }
+
+  main {
+    min-height: calc(100vh - 10rem);
+  }
+
+  .site-footer {
+    margin-top: var(--space-3xl);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-content p {
+    margin: 0;
+  }
+
+  @media (max-width: 48rem) {
+    .header-content {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding-block: var(--space-md);
+    }
+
+    .navigation {
+      gap: var(--space-sm) var(--space-lg);
+    }
+
+    .footer-content {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>
