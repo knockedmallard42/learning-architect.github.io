@@ -1,0 +1,63 @@
+.project-content h2 {
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-lg);
+
+  color: var(--theme-dark);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+.project-content h2::after {
+  content: "";
+
+  display: block;
+
+  width: var(--space-3xl);
+  height: var(--space-2xs);
+
+  margin-top: var(--space-md);
+
+  border-radius: var(--radius-pill);
+
+  background: var(--theme-medium);
+}
+
+.project-content h3 {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+
+  color: var(--theme-dark);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.project-content p {
+  margin-bottom: var(--space-md);
+  line-height: 1.8;
+}
+
+.project-content ul,
+.project-content ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+.project-content li {
+  margin-bottom: var(--space-sm);
+}
+
+.project-content > p,
+.project-content > h2,
+.project-content > h3,
+.project-content > h4,
+.project-content > ul,
+.project-content > ol,
+.project-content > blockquote {
+  max-width: var(--reading-width);
+}

@@ -1,0 +1,95 @@
+---
+interface Props {
+  direction?: 'row' | 'column';
+  align?: 'start' | 'center' | 'end';
+  justify?: 'start' | 'center' | 'between';
+  wrap?: 'wrap' | 'nowrap';
+  gap?: 'small' | 'medium' | 'large';
+}
+
+const {
+  direction = 'row',
+  align = 'center',
+  justify = 'start',
+  wrap = 'wrap',
+  gap = 'medium',
+} = Astro.props;
+
+const groupClasses = [
+  'button-group',
+  `direction-${direction}`,
+  `align-${align}`,
+  `justify-${justify}`,
+  `wrap-${wrap}`,
+  `gap-${gap}`,
+].join(' ');
+---
+
+<div class={groupClasses}>
+  <slot />
+</div>
+
+<style>
+	.button-group {
+	  display: flex;
+	}
+
+	.direction-row {
+	  flex-direction: row;
+	}
+
+	.direction-column {
+	  flex-direction: column;
+	}
+
+	.align-start {
+	  align-items: flex-start;
+	}
+
+	.align-center {
+	  align-items: center;
+	}
+
+	.align-end {
+	  align-items: flex-end;
+	}
+
+	.justify-start {
+	  justify-content: flex-start;
+	}
+
+	.justify-center {
+	  justify-content: center;
+	}
+
+	.justify-between {
+	  justify-content: space-between;
+	}
+
+	.wrap-wrap {
+	  flex-wrap: wrap;
+	}
+
+	.wrap-nowrap {
+	  flex-wrap: nowrap;
+	}
+
+	.gap-small {
+	  gap: var(--space-sm);
+	}
+
+	.gap-medium {
+	  gap: var(--space-md);
+	}
+
+	.gap-large {
+	  gap: var(--space-lg);
+	}
+	
+	@media (max-width: 45rem) {
+		.button-group {
+			align-items: stretch;
+			flex-direction: column;
+		}
+	}
+</style>

@@ -1,0 +1,366 @@
+---
+export type ProjectArtwork =
+  | 'learning'
+  | 'software'
+  | 'documentation'
+  | 'none';
+
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  href: string;
+
+  linkLabel?: string;
+  artLabel?: string;
+
+  theme?: Theme;
+  artwork?: ProjectArtwork;
+  artTone?: Tone;
+
+  featured?: boolean;
+}
+
+const {
+  title,
+  category,
+  description,
+  href,
+  linkLabel = 'View project',
+  artLabel = category,
+  theme = 'steel',
+  artwork = 'learning',
+  artTone = 'light',
+  featured = false,
+} = Astro.props;
+
+const cardClasses = [
+  'project-card',
+  `theme-${theme}`,
+  `art-tone-${artTone}`,
+  featured ? 'project-card-featured' : '',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<article class={cardClasses}>
+  <div class="card-art" aria-hidden="true">
+    <span class="card-art-label">{artLabel}</span>
+
+    {
+      artwork === 'learning' && (
+        <div class="artwork artwork-learning">
+          <span class="learning-circle"></span>
+          <span class="learning-line learning-line-one"></span>
+          <span class="learning-line learning-line-two"></span>
+        </div>
+      )
+    }
+
+    {
+      artwork === 'software' && (
+        <div class="artwork artwork-software">
+          <span class="software-block software-block-one"></span>
+          <span class="software-block software-block-two"></span>
+          <span class="software-block software-block-three"></span>
+        </div>
+      )
+    }
+
+    {
+      artwork === 'documentation' && (
+        <div class="artwork artwork-documentation">
+          <span class="document document-one"></span>
+          <span class="document document-two"></span>
+          <span class="document-line document-line-one"></span>
+          <span class="document-line document-line-two"></span>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="card-content">
+    <p class="card-category">{category}</p>
+
+    <h3>
+      <a href={href}>
+        {title}
+      </a>
+    </h3>
+
+    <p class="card-description">
+      {description}
+    </p>
+
+    <a class="card-link" href={href}>
+      {linkLabel}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .project-card {
+	--art-background: var(--theme-light);
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .project-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-0.25rem);
+  }
+  
+  .art-tone-soft {
+	--art-background: var(--theme-soft);
+  }
+
+  .art-tone-light {
+	--art-background: var(--theme-light);
+  }
+
+  .art-tone-medium {
+    --art-background: var(--theme-medium);
+  }
+
+  .art-tone-dark {
+    --art-background: var(--theme-dark);
+  }
+
+  .card-art {
+    position: relative;
+    min-height: 8rem;
+    overflow: hidden;
+    padding: var(--space-lg);
+    background: var(--art-background);
+  }
+
+  .card-art-label {
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 88%);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  
+  .art-tone-dark .card-art-label,
+  .art-tone-medium .card-art-label {
+    background: rgb(255 255 255 / 92%);
+  }
+
+  .artwork {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .art-tone-dark .learning-circle,
+  .art-tone-dark .software-block,
+  .art-tone-dark .document-one {
+    opacity: 0.75;
+  }
+
+  /* Learning artwork */
+
+  .learning-circle {
+    position: absolute;
+    top: -2.25rem;
+    right: 12%;
+    width: 8rem;
+    height: 8rem;
+    border: 1.4rem solid rgb(255 255 255 / 48%);
+    border-radius: 50%;
+  }
+
+  .learning-line {
+    position: absolute;
+    height: 0.55rem;
+    border-radius: var(--radius-pill);
+    background: var(--theme-dark);
+    transform: rotate(-8deg);
+  }
+
+  .learning-line-one {
+    right: -1rem;
+    bottom: 2.2rem;
+    width: 12rem;
+  }
+
+  .learning-line-two {
+    right: 2rem;
+    bottom: 0.7rem;
+    width: 7rem;
+  }
+
+  /* Software artwork */
+
+  .software-block {
+    position: absolute;
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 52%);
+    transform: rotate(8deg);
+  }
+
+  .software-block-one {
+    top: -1.5rem;
+    right: 7rem;
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .software-block-two {
+    top: 2rem;
+    right: 2rem;
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .software-block-three {
+    right: 10rem;
+    bottom: -3rem;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  /* Documentation artwork */
+
+  .document {
+    position: absolute;
+    width: 7rem;
+    height: 9rem;
+    border-radius: 0.8rem;
+  }
+
+  .document-one {
+    top: -3rem;
+    right: 2rem;
+    background: rgb(255 255 255 / 58%);
+    transform: rotate(10deg);
+  }
+
+  .document-two {
+    top: 1rem;
+    right: 7rem;
+    border: 0.3rem solid var(--theme-medium);
+    background: transparent;
+    transform: rotate(-8deg);
+  }
+
+  .document-line {
+    position: absolute;
+    right: 1.6rem;
+    z-index: 2;
+    height: 0.3rem;
+    border-radius: var(--radius-pill);
+    background: var(--theme-dark);
+    transform: rotate(10deg);
+  }
+
+  .document-line-one {
+    top: 3rem;
+    width: 3.6rem;
+  }
+
+  .document-line-two {
+    top: 4rem;
+    width: 2.7rem;
+  }
+
+  /* Card content */
+
+  .card-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: var(--space-xl);
+  }
+
+  .card-category {
+    margin-bottom: var(--space-sm);
+    color: var(--theme-dark);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-content h3 {
+    margin-bottom: var(--space-md);
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 3vw, 2.25rem);
+    font-variation-settings:
+      'SOFT' 70,
+      'WONK' 1,
+      'opsz' 40;
+  }
+
+  .card-content h3 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .card-content h3 a:hover {
+    color: var(--theme-dark);
+  }
+
+  .card-description {
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-muted);
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: auto;
+    color: var(--theme-dark);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .card-link span {
+    transition: transform 150ms ease;
+  }
+
+  .card-link:hover {
+    color: var(--theme-dark);
+  }
+
+  .card-link:hover span {
+    transform: translateX(0.25rem);
+  }
+
+  /* Featured cards can span the grid when the grid allows it. */
+
+  .project-card-featured {
+    grid-column: 1 / -1;
+  }
+
+  .project-card-featured .card-art {
+    min-height: 11rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover {
+      transform: none;
+    }
+  }
+</style>

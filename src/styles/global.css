@@ -1,34 +1,285 @@
 :root {
-  --color-background: #f7f7f4;
-  --color-surface: #ffffff;
-  --color-text: #202124;
-  --color-text-muted: #62666d;
-  --color-border: #d9dcd8;
-  --color-accent: #265d73;
-  --color-accent-hover: #17475b;
+	/* ---------------------------------
+		Neutral ink and paper
+	--------------------------------- */
 
-  --content-width: 72rem;
-  --reading-width: 48rem;
+	--color-paper-50: #fcfaf5;
+	--color-paper-100: #f4efe6;
+	--color-paper-200: #eae2d5;
 
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 5rem;
+	--color-white: #ffffff;
 
-  --radius-sm: 0.35rem;
-  --radius-md: 0.75rem;
+	--color-granite-950: #222428;
+	--color-granite-800: #3d4147;
+	--color-granite-600: #666c73;
+	--color-granite-400: #969ba0;
+	--color-granite-300: #bec2c5;
+	--color-granite-200: #dadcdd;
+	--color-granite-100: #eceeed;
 
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+	/* ---------------------------------
+		Primary brand colors
+	--------------------------------- */
+
+	--color-steel-800: #21475d;
+	--color-steel-700: #28536b;
+	--color-steel-600: #356985;
+	--color-steel-400: #6f99ae;
+	--color-steel-200: #b8d0db;
+	--color-steel-100: #dce9ee;
+
+	--color-sage-800: #4e6547;
+	--color-sage-700: #5e7555;
+	--color-sage-500: #7d9571;
+	--color-sage-300: #afbea7;
+	--color-sage-200: #cfdbc9;
+	--color-sage-100: #e7ede3;
+
+	/* ---------------------------------
+		Secondary brand colors
+	--------------------------------- */
+
+	--color-plum-800: #63385d;
+	--color-plum-700: #75446d;
+	--color-plum-500: #9a5f91;
+	--color-plum-300: #c69bbe;
+	--color-plum-100: #f1e3ee;
+
+	--color-gold-700: #8d6326;
+	--color-gold-600: #a9782f;
+	--color-gold-500: #c99a4a;
+	--color-gold-300: #dfbe7f;
+	--color-gold-100: #f6ead2;
+
+	--color-coral-700: #914d46;
+	--color-coral-600: #a85e55;
+	--color-coral-500: #c9796f;
+	--color-coral-300: #dfa9a2;
+	--color-coral-100: #f5e2df;
+
+	/* ---------------------------------
+		Semantic colors
+	--------------------------------- */
+
+	--color-background: var(--color-paper-50);
+	--color-surface: var(--color-white);
+	--color-surface-subtle: var(--color-paper-100);
+
+	--color-text: var(--color-granite-950);
+	--color-text-muted: var(--color-granite-600);
+	--color-border: var(--color-granite-300);
+
+	--color-accent: var(--color-steel-600);
+	--color-accent-hover: var(--color-steel-800);
+	--color-accent-soft: var(--color-steel-100);
+
+	--color-secondary: var(--color-sage-500);
+	--color-secondary-hover: var(--color-sage-800);
+	--color-secondary-soft: var(--color-sage-100);
+
+	/* ---------------------------------
+		Theme Mappings
+	--------------------------------- */
+    .theme-steel {
+		--theme-dark: var(--color-steel-700);
+		--theme-medium: var(--color-steel-400);
+		--theme-light: var(--color-steel-200);
+		--theme-soft: var(--color-steel-100);
+	}
+	
+	.theme-sage {
+		--theme-dark: var(--color-sage-700);
+		--theme-medium: var(--color-sage-500);
+		--theme-light: var(--color-sage-200);
+		--theme-soft: var(--color-sage-100);
+	}
+
+	.theme-plum {
+		--theme-dark: var(--color-plum-700);
+		--theme-medium: var(--color-plum-500);
+		--theme-light: var(--color-plum-300);
+		--theme-soft: var(--color-plum-100);
+	}
+
+	.theme-gold {
+		--theme-dark: var(--color-gold-700);
+		--theme-medium: var(--color-gold-500);
+		--theme-light: var(--color-gold-300);
+		--theme-soft: var(--color-gold-100);
+	}
+
+	.theme-coral {
+		--theme-dark: var(--color-coral-700);
+		--theme-medium: var(--color-coral-500);
+		--theme-light: var(--color-coral-300);
+		--theme-soft: var(--color-coral-100);
+	}
+	
+	.theme-neutral {
+		--theme-dark: var(--color-granite-600);
+		--theme-medium: var(--color-granite-400);
+		--theme-light: var(--color-granite-200);
+		--theme-soft: var(--color-granite-100);
+	}
+	
+	.theme-warm {
+		--theme-dark: var(--color-paper-200);
+		--theme-medium: var(--color-paper-100);
+		--theme-light: var(--color-paper-50);
+		--theme-soft: var(--color-white);
+	}
+  
+	/* ---------------------------------
+		Tone Mappings
+	--------------------------------- */
+	.tone-soft {
+		--tone-background: var(--theme-soft);
+		--tone-foreground: var(--theme-dark);
+		--tone-hover: var(--theme-light);
+	}
+	
+	.tone-light {
+		--tone-background: var(--theme-light);
+		--tone-foreground: var(--theme-dark);
+		--tone-hover: var(--theme-medium);
+	}
+	
+	.tone-medium {
+		--tone-background: var(--theme-medium);
+		--tone-foreground: var(--color-text);
+		--tone-hover: var(--theme-dark);
+	}
+	
+	.tone-dark {
+		--tone-background: var(--theme-dark);
+		--tone-foreground: var(--color-white);
+		--tone-hover: var(--theme-medium);
+	}
+
+	/* ---------------------------------
+		Typography
+	--------------------------------- */
+
+	--font-display:
+		"Fraunces Variable",
+		Fraunces,
+		Georgia,
+		serif;
+
+	--font-body:
+		"Source Sans 3 Variable",
+		"Source Sans 3",
+		"Segoe UI",
+		sans-serif;
+
+	--font-mono:
+		"IBM Plex Mono Variable",
+		"IBM Plex Mono",
+		Consolas,
+		monospace;
+
+	--font-size-xs: 0.78rem;
+	--font-size-sm: 0.9rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.2rem;
+	--font-size-xl: 1.5rem;
+	--font-size-2xl: clamp(1.8rem, 4vw, 2.5rem);
+	--font-size-3xl: clamp(2.7rem, 7vw, 5.5rem);
+
+	/* ---------------------------------
+		Layout
+	--------------------------------- */
+	
+	--content-width: 72rem;
+	--reading-width: 48rem;
+	
+	.width-content {
+		--comp-width: var(--content-width);
+		max-width: var(--comp-width);
+	}
+	
+	.width-reading {
+		--comp-width: var(--content-width);
+		max-width: var(--comp-width);
+	}
+	
+	--site-gutter: var(--pad-comfortable);
+	
+	.site-container {
+		width: 100%;
+		max-width: var(--content-width);
+		margin-inline: auto;
+		padding-inline: var(--site-gutter);
+	}
+
+	/* ---------------------------------
+		Spacing
+	--------------------------------- */
+
+	--space-2xs: 0.25rem;
+	--space-xs: 0.5rem;
+	--space-sm: 0.75rem;
+	--space-md: 1rem;
+	--space-lg: 1.5rem;
+	--space-xl: 2rem;
+	--space-2xl: 3rem;
+	--space-3xl: 5rem;
+	--space-4xl: 7rem;
+  
+	/* ---------------------------------
+		Interior Spacing
+	--------------------------------- */
+	--pad-compact: clamp(var(--space-sm), 1.5vw, var(--space-lg));
+	--pad-comfortable: clamp(var(--space-lg), 2vw, var(--space-2xl));
+	--pad-generous: clamp(var(--space-2xl), 5vw, var(--space-4xl));
+	  
+	.padding-compact {
+		--comp-padding: var(--pad-compact);
+		padding: var(--comp-padding);
+	}
+	
+	.padding-comfortable {
+		--comp-padding: var(--pad-comfortable);
+		padding: var(--comp-padding);
+	}
+	
+	.padding-generous {
+		--comp-padding: var(--pad-generous);
+		padding: var(--comp-padding);
+	}
+
+  /* ---------------------------------
+     Shape
+  --------------------------------- */
+
+  --radius-sm: 0.65rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2.25rem;
+  --radius-pill: 999rem;
+
+  /* ---------------------------------
+     Effects
+  --------------------------------- */
+
+  --shadow-sm:
+    0 1px 2px rgb(34 36 40 / 6%),
+    0 5px 14px rgb(34 36 40 / 5%);
+
+  --shadow-md:
+    0 2px 4px rgb(34 36 40 / 7%),
+    0 16px 34px rgb(34 36 40 / 9%);
+
+  font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
+
+/* ---------------------------------
+   Reset and document defaults
+--------------------------------- */
 
 *,
 *::before,
@@ -46,6 +297,7 @@ body {
   margin: 0;
   background: var(--color-background);
   color: var(--color-text);
+  font-size: var(--font-size-md);
   line-height: 1.6;
 }
 
@@ -63,6 +315,10 @@ select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   color: var(--color-accent);
   text-decoration-thickness: 0.08em;
@@ -78,12 +334,48 @@ h2,
 h3,
 h4 {
   margin-block: 0 0.6em;
-  line-height: 1.15;
+  color: var(--color-text);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+h1,
+.display-heading {
+  font-family: var(--font-display);
+  font-variation-settings:
+    "SOFT" 80,
+    "WONK" 1,
+    "opsz" 72;
+}
+
+h2,
+h3,
+h4 {
+  font-family: var(--font-body);
 }
 
 p {
   margin-block: 0 1em;
 }
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: var(--color-plum-100);
+  color: var(--color-text);
+}
+
+:focus-visible {
+  outline: 0.2rem solid var(--color-plum-500);
+  outline-offset: 0.2rem;
+}
+
+/* ---------------------------------
+   Shared layout utilities
+--------------------------------- */
 
 .container {
   width: min(100% - 2rem, var(--content-width));
@@ -94,18 +386,54 @@ p {
   max-width: var(--reading-width);
 }
 
+.surface {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------
+   Accessibility
+--------------------------------- */
+
 .skip-link {
   position: fixed;
   top: var(--space-md);
   left: var(--space-md);
-  z-index: 100;
+  z-index: 1000;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-sm);
   background: var(--color-text);
-  color: white;
+  color: var(--color-white);
+  text-decoration: none;
   transform: translateY(-200%);
 }
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

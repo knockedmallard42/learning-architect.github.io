@@ -1,0 +1,26 @@
+---
+import { getCollection, render } from 'astro:content';
+
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import { mdxComponents } from '../../components/mdx/mdx-components';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('portfolio');
+
+  return projects.map((project) => ({
+    params: {
+      slug: project.id,
+    },
+    props: {
+      project,
+    },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<PortfolioLayout project={project.data}>
+  <Content components={mdxComponents} />
+</PortfolioLayout>

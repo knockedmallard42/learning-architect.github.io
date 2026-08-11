@@ -1,0 +1,104 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navigation = [
+	{ label: 'Portfolio', href: '/portfolio/' },
+	{ label: 'About', href: '/about/' }
+];
+
+function isCurrentPage(href: string) : boolean {
+	if (href === '/') {
+		return currentPath === '/';
+	}
+	
+	return currentPath.startsWith(href);
+}
+---
+
+<header class="site-header">
+	<div class="container header-content">
+		<a class="site-name" href="/">
+			Russ Designs
+		</a>
+		
+		<nav aria-label="Primary navigation">
+			<ul class="navigation">
+				{
+					navigation.map((item) => (
+						<li>
+							<a
+								href={item.href}
+								aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+							>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    min-height: 4.5rem;
+  }
+
+  .site-name {
+    color: var(--color-text);
+    font-size: 1.15rem;
+    font-weight: 750;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .navigation a {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .navigation a:hover {
+    color: var(--color-accent);
+  }
+
+  .navigation a[aria-current='page'] {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 0.15rem;
+    text-underline-offset: 0.4rem;
+  }
+
+  @media (max-width: 48rem) {
+    .header-content {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-sm);
+      padding-block: var(--space-md);
+    }
+
+    .navigation {
+      gap: var(--space-sm) var(--space-lg);
+    }
+  }
+</style>

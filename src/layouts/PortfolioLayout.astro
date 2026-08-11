@@ -1,0 +1,180 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import '../styles/prose.css';
+
+interface Props {
+  project: {
+    title: string;
+    summary: string;
+    year: number;
+    category: string;
+    capabilities: string[];
+
+    theme?: string;
+  };
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.summary}
+>
+  <article class={`portfolio-project theme-${project.theme ?? 'steel'}`}>
+    <header class="project-header">
+      <div class="container">
+        <div class="project-heading">
+          <p class="project-category">
+            {project.category}
+          </p>
+
+          <h1>{project.title}</h1>
+
+          <p class="project-summary">
+            {project.summary}
+          </p>
+        </div>
+
+        <dl class="project-metadata">
+          <div>
+            <dt>Year</dt>
+            <dd>{project.year}</dd>
+          </div>
+
+          <div>
+            <dt>Capabilities</dt>
+
+            <dd>
+              <ul class="capability-list">
+                {
+                  project.capabilities.map((capability) => (
+                    <li>{capability}</li>
+                  ))
+                }
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="container project-body">
+      <div class="project-content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .portfolio-project {
+    --project-accent: var(--theme-dark);
+    --project-soft: var(--theme-soft);
+  }
+
+  .project-header {
+    padding-block: var(--space-4xl);
+    background: var(--project-soft);
+  }
+
+  .project-header > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.32fr);
+    gap: var(--space-3xl);
+    align-items: end;
+  }
+
+  .project-heading {
+    max-width: 54rem;
+  }
+
+  .project-category {
+    margin-bottom: var(--space-md);
+    color: var(--project-accent);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-heading h1 {
+    max-width: 14ch;
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-size-3xl);
+  }
+
+  .project-summary {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .project-metadata {
+    display: grid;
+    gap: var(--space-xl);
+    margin: 0;
+  }
+
+  .project-metadata > div {
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--theme-medium);
+  }
+
+  .project-metadata dt {
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .project-metadata dd {
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .capability-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .capability-list li {
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 65%);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  .project-body {
+    padding-block: var(--space-4xl);
+  }
+
+  .project-content {
+    max-width: var(--content-width);
+  }
+  
+  @media (max-width: 48rem) {
+    .project-header {
+      padding-block: var(--space-3xl);
+    }
+
+    .project-header > .container {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .project-body {
+      padding-block: var(--space-3xl);
+    }
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+interface Props {
+	theme?: Theme;
+	tone?: Tone;
+	
+	padding?: Padding;
+	width?: Width;
+	
+	border?: 'solid' | 'dashed' | 'none';
+	surface?: 'plain' | 'subtle' | 'tinted';
+	accent?: 'none' | 'top' | 'left';
+}
+
+const {
+	theme = 'warm',
+	tone = 'soft',
+	
+	padding = 'comfortable',
+	width = 'content',
+	
+	border = 'solid',
+	surface = 'plain',
+	accent = 'none',
+} = Astro.props;
+
+const frameClasses = [
+	'callout-frame',
+	`theme-${theme}`,
+	`tone-${tone}`,
+	`padding-${padding}`,
+	`width-${width}`,
+	
+	`frame-border-${border}`,
+	`frame-surface-${surface}`,
+	`frame-accent-${accent}`,
+]
+	.join(' ');
+---
+
+<div class={frameClasses}>
+	<slot />
+</div>
+
+<style>
+	.callout-frame {
+		--frame-border-edge: solid;
+		
+		--frame-color-background: var(--color-white);
+		--frame-color-border: var(--color-border);
+		
+		position: relative;
+		width: 100%;
+		margin-inline: 0;
+		margin-top: var(--space-lg);
+		margin-bottom: var(--space-lg);
+		
+		border: 1px var(--frame-border-edge) var(--frame-color-border);
+		border-radius: var(--radius-xl);
+		background: var(--frame-color-background);
+	}
+	
+	.width-auto {
+		width: fit-content;
+		max-width: 100%;
+	}
+	
+	.frame-border-solid {
+		--frame-border-edge: solid;
+	}
+	
+	.frame-border-dashed {
+		--frame-border-edge: dashed;
+	}
+	
+	.frame-border-none {
+		--frame-color-border: transparent;
+	}
+	
+	.frame-surface-plain {
+		--frame-color-background: var(--color-white);
+		--frame-color-border: var(--color-border);
+	}
+	
+	.frame-surface-subtle {
+		--frame-color-background: var(--color-surface-subtle);
+		--frame-color-border: var(--color-border);
+	}
+	
+	.frame-surface-tinted {
+		--frame-color-background: var(--tone-background);
+		--frame-color-border: var(--tone-foreground);
+	}
+	
+	.frame-accent-top {
+		padding-top: calc(
+			var(--comp-padding) +
+			var(--space-lg)
+		);
+	}
+	
+	.frame-accent-top::before {
+		content: "";
+		position: absolute;
+		
+		top: var(--comp-padding);
+		left: var(--comp-padding);
+		right: var(--comp-padding);
+		
+		height: var(--space-xs);
+		
+		border-radius: var(--radius-pill);
+		background: var(--theme-dark);
+	}
+	
+	.frame-accent-left {
+		padding-left: calc(
+			var(--comp-padding) +
+			var(--space-lg)
+		);
+	}
+	
+	.frame-accent-left::before {
+		content: "";
+		position: absolute;
+		
+		top: var(--comp-padding);
+		bottom: var(--comp-padding);
+		left: var(--comp-padding);
+		
+		width: var(--space-xs);
+		
+		border-radius: var(--radius-pill);
+		background: var(--theme-dark);
+	}
+	
+</style>

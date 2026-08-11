@@ -1,0 +1,411 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ColumnGroup from '../components/layout/ColumnGroup.astro';
+import CalloutFrame from '../components/layout/CalloutFrame.astro';
+---
+
+<BaseLayout
+  title="About | Russ Designs"
+  description="Instructional designer, learning technologist, developer, and systems thinker."
+>
+	<main class="about-page site-container">
+		<section class="about-hero">
+			<div class="hero-copy">
+				<p class="eyebrow">About</p>
+
+				<h1>
+					I build learning systems, <br/>
+					<span class="hero-emphasis">not just content.</span>
+				</h1>
+
+				<p class="introduction">
+					I’m an instructional designer, technical communicator,
+					programmer, and systems-oriented problem solver.
+					That means I tend to look at learning problems a little differently:
+				</p>
+			</div>
+			
+			<div class="hero-mark" aria-hidden="true">
+				<span class="mark-piece mark-steel"></span>
+				<span class="mark-piece mark-sage"></span>
+				<span class="mark-piece mark-plum"></span>
+				<span class="mark-piece mark-gold"></span>
+			</div>
+		</section>
+		
+		<section class="introduction">
+		
+			<ul>
+				<li>When someone asks for a course, I want to know if that's actually the answer.</li>
+				<li>When a team needs a new tool, I want to know how it fits into the rest of their learning ecosystem.</li>
+				<li>When a process works because someone knows the twelve weird steps to keep it working, I want to redesign the process—not write better instructions for twelve weird steps.</li>
+			</ul>
+			
+			<p>
+				I work across the full learning lifecycle: analysis, architecture, design, development, implementation, evaluation, and iteration. (ADDIE on steroids.) 
+				But I'm equally comfortable moving beyond the traditional boundaries of instructional design. 
+				Some learning projects need a different approach and the flexibility to adapt to the project needs rather than force a single instructional design approach.
+			</p>
+			
+			<p>
+				I can talk to a SME about performance objectives, dig through an LMS configuration, 
+				map a workflow, prototype an interaction, troubleshoot HTML and CSS, read code, 
+				work with APIs and data structures, program an Excel macro with VBA, design reusable components, 
+				define a true knowledge base taxonomy, throw together an icon, design a layout, 
+				and translate technical constraints into decisions that actually make sense for learners and the people supporting them.
+			</p>
+		
+		</section>
+		
+		<section class="about-content theme-steel">
+		
+			<h2>I thrive in the spaces between disciplines</h2>
+			
+			<p>
+				Some of the most interesting problems don’t belong neatly
+				to instructional design, software development, UX,
+				operations, or learning technology.
+			</p>
+
+			<p>
+				They live somewhere in the middle.
+			</p>
+			
+		</section>
+			
+		<CalloutFrame
+			surface="subtle"
+			width="content"
+		>
+		
+			<ColumnGroup
+				sections={[
+					{
+						type: "content",
+						items: [
+							"My technical background gives me enough understanding to work effectively with developers and technical systems without treating technology like a magic black box."
+						]
+					},
+					{
+						type: "content",
+						items: [
+							"My instructional design background keeps the technology grounded in what people actually need to learn and do."
+						]
+					},
+					{
+						type: "content",
+						items: [
+							"And my systems orientation makes me think beyond the immediate deliverable to the ecosystem around it."
+						]
+					}
+				]}
+			/>
+		</CalloutFrame>
+		
+		<div class="about-content theme-steel">
+			<p>The question isn't just: <b>Does this work?</b></p>
+			<p>It's also:
+				<ul>
+					<li>Will this still work when there are 200 courses instead of 20?</li>
+					<li>Can someone other than me maintain it?</li>
+					<li>What happens when the requirements change?</li>
+					<li>Are we solving the underlying issue, or just making the workaround prettier?</li>
+				</ul>
+			</p>
+		
+			<h2>Built-to-last beats built-to-get-by</h2>
+			
+			<p>I care deeply about maintainability and sustainability.</p>
+			
+			<p>
+				Not because everything needs to be engineered into an enormous enterprise system, 
+				but because "we'll fix it later" has a habit of becoming permanent architecture.
+			</p>
+			
+			<p>
+				I build reusable patterns. I document decisions. I think about naming, structure, governance, ownership 
+				accessibility, scalability, and what happens after launch.
+			</p>
+			
+			<p>Sometimes the right solution is sophisticated...</p>
+			
+			<p>...sometimes it's remarkably simple.</p>
+			
+			<p>The important part is understanding the system well enough to know the difference.</p>
+		
+		</div>
+	
+		<section class="capabilities">
+			<header class="section-heading theme-steel">
+				<h2>What I bring to the table</h2>
+				<p>Broad enough to connect the pieces. Deep enough to build them.</p>
+			</header>
+			
+			<div class="capability-grid">
+				<article class="capability capability-01">
+					<span class="capability-number">01</span>
+					<h3>Instructional Design</h3>
+					<p>
+						Analysis through evaluation. Not just content development. 
+						I can identify the performance problem, design the intervention, 
+						build it, implement it, and determine whether it worked.
+					</p>
+				</article>
+				
+				<article class="capability capability-02">
+					<span class="capability-number">02</span>
+					<h3>Learning Technology</h3>
+					<p>
+						LMS administration and architecture, learning ecosystems, 
+						integrations, content standards, technical troubleshooting, 
+						platform evaluation, and implementation.
+					</p>
+				</article>
+				
+				<article class="capability capability-03">
+					<span class="capability-number">03</span>
+					<h3>Technical Fluency</h3>
+					<p>
+						Programming concepts, web technologies, data structures, 
+						version control, APIs, and component-based development. 
+						Enough depth to collaborate meaningfully with engineers.
+					</p>
+				</article>
+				
+				<article class="capability capability-04">
+					<span class="capability-number">04</span>
+					<h3>Systems Thinking</h3>
+					<p>
+						I look for dependencies, patterns, bottlenecks, failure points, 
+						and opportunities to turn one-off solutions into sustainable systems.
+					</p>
+				</article>
+				
+				<article class="capability capability-05">
+					<span class="capability-number">05</span>
+					<h3>Making Things</h3>
+					<p>
+						Ultimately, I'm a builder. Courses, tools, processes, 
+						components, architectures, prototypes, documentation—whatever form the solution needs to take.
+					</p>
+				</article>
+			</div>
+		</section>
+		
+		<div class="theme-steel">
+			<h2>I'm interested in hard problems</h2>
+			
+			<p>Especially the ones where learning and technology collide.</p>
+			
+			<p>
+				I'm at my best when there's something to untangle:
+				a learning ecosystem that has grown organically,
+				a platform that no longer fits the organization,
+				a manual process that should probably be a system,
+				a new learning function that needs an architecture,
+				or a problem where nobody is quite sure whether the solutions belongs to L&D, IT, product, or somewhere in between.
+			</p>
+			
+			<CalloutFrame
+				theme="gold"
+				padding="compact"
+				surface="tinted"
+				accent="left"
+			>
+				<span class="call-to-action"> Give me the messy version.</span>
+				<p> That's usually where the fun start.</p>
+			</CalloutFrame>
+		</div>
+	</main>
+</BaseLayout>
+
+<style>
+
+	.about-page {
+		padding-block: var(--space-3xl) var(--space-4xl);
+	}
+
+	.about-page h1 {
+		max-width: 12ch;
+		margin-bottom: var(--space-lg);
+		font-size: var(--font-size-3xl);
+	}
+	
+	.about-page h2 {
+		margin-top: var(--space-3xl);
+		margin-bottom: var(--space-lg);
+
+		color: var(--theme-dark);
+
+		font-family: var(--font-body);
+		font-size: var(--font-size-2xl);
+		font-weight: 700;
+
+		line-height: 1.1;
+	}
+	
+	.about-page h2::after {
+		content: "";
+		
+		display: block;
+
+		width: var(--space-3xl);
+		height: var(--space-2xs);
+
+		margin-top: var(--space-md);
+
+		border-radius: var(--radius-pill);
+
+		background: var(--theme-medium);
+	}
+	
+	.about-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.38fr);
+		align-items: center;
+		gap: var(--space-2xl);
+		margin-bottom: var(--space-xs);
+	}
+	
+	.hero-emphasis {
+		font-size: var(--font-size-3xl);
+		color: var(--color-steel-700);
+	}
+	
+	.introduction {
+		max-width: var(--reading-width);
+	
+		color: var(--color-text-muted);
+		font-size: var(--font-size-lg);
+	}
+	
+	.hero-mark {
+		position: relative;
+		min-height: 22rem;
+	}
+	
+	.mark-piece {
+		position: absolute;
+		display: block;
+		border-radius: var(--radius-xl);
+	}
+	
+	.mark-steel {
+		top: 1rem;
+		right: 0;
+		width: 10rem;
+		height: 14rem;
+		background: var(--color-steel-400);
+		transform: rotate(8deg);
+	}
+	
+	.mark-sage {
+		right: 7rem;
+		bottom: 1rem;
+		width: 9rem;
+		height: 10rem;
+		background: var(--color-sage-300);
+		transform: rotate(-9deg);
+	}
+	
+	.mark-plum {
+		top: 7rem;
+		right: 8.5rem;
+		width: 6rem;
+		height: 6rem;
+		border-radius: 50%;
+		background: var(--color-plum-500);
+	}
+	
+	.mark-gold {
+		right: 1rem;
+		bottom: 0;
+		width: 7rem;
+		height: 5rem;
+		background: var(--color-gold-300);
+		transform: rotate(5deg);
+	}
+	
+	.about-content {
+		max-width: var(--reading-width);
+	}
+	
+	.capability-grid {
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: var(--space-lg);
+		align-items: start;
+		max-width: var(--content-width);
+	}
+	
+	.capability {
+		padding: var(--pad-comfortable);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow-sm);
+	}
+	
+	.capability-01 {
+		grid-column: span 7;
+		min-height: 22rem;
+		background: var(--color-steel-100);
+	}
+	
+	.capability-02 {
+		grid-column: span 5;
+		margin-top: var(--space-2xl);
+		margin-left: calc(var(--space-xl) * -1);
+		min-height: 19rem;
+		background: var(--color-sage-100);
+	}
+	
+	.capability-03 {
+		grid-column: span 5;
+		margin-top: calc(var(--space-2xl) * -1);
+		margin-left: var(--space-2xl);
+		min-height: 19rem;
+		background: var(--color-plum-100);
+	}
+	
+	.capability-04 {
+		grid-column: span 6;
+		margin-top: calc(var(--space-xl) * -1);
+		margin-left: calc(var(--space-lg) * -1);
+		min-height: 20rem;
+		background: var(--color-gold-100);
+	}
+	
+	.capability-05 {
+		grid-column: span 12;
+		margin-top: calc(var(--space-xl) * -1);
+		min-height: 12rem;
+		background: var(--color-steel-100);
+	}
+	
+	.capability-number {
+		display: block;
+		margin-bottom: var(--space-2xl);
+		color: var(--color-granite-600);
+		font-family: var(--font-mono);
+		font-size: var(--font-size-xs);
+	}
+	
+	.capability h3 {
+		font-family: var(--font-display);
+		font-size: var(--font-size-xl);
+		font-variation-settings:
+			"SOFT" 60,
+			"WONK" 1,
+			"opsz" 48;
+	}
+	
+	.capability p {
+		color: var(--color-text-muted);
+	}
+	
+	.call-to-action {
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+		color: var(--theme-dark);
+	}
+
+</style>

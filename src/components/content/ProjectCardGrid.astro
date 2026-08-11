@@ -1,0 +1,45 @@
+---
+interface Props {
+  columns?: 2 | 3;
+  ariaLabel?: string;
+}
+
+const {
+  columns = 2,
+  ariaLabel = 'Projects',
+} = Astro.props;
+---
+
+<div
+  class="project-card-grid"
+  data-columns={columns}
+  aria-label={ariaLabel}
+>
+  <slot />
+</div>
+
+<style>
+  .project-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: var(--space-xl);
+  }
+
+  .project-card-grid[data-columns='3'] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 64rem) {
+    .project-card-grid[data-columns='3'] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 45rem) {
+    .project-card-grid,
+    .project-card-grid[data-columns='3'] {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

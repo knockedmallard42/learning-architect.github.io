@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/content/ProjectCard.astro';
+import ProjectCardGrid from '../../components/content/ProjectCardGrid.astro';
+
+const projects = await getCollection('portfolio');
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Selected learning architecture, instructional design, technical communication, and software projects."
+>
+  <div class="container portfolio-page">
+    <header class="portfolio-header">
+      <p class="eyebrow">Selected work</p>
+
+      <h1>Portfolio</h1>
+
+      <p class="introduction">
+        Case studies exploring learning systems, instructional design,
+        technical communication, and software architecture.
+      </p>
+    </header>
+
+    <ProjectCardGrid columns={3}>
+	  {
+		projects.map((project) => (
+		  <ProjectCard
+			title={project.data.title}
+			category={project.data.category}
+			description={project.data.summary}
+			theme={project.data.theme}
+			artwork={project.data.artwork}
+			artTone={project.data.artTone}
+			featured={project.data.featured}
+			artLabel={project.data.artLabel}
+			linkLabel={project.data.linkLabel}
+			href={`/portfolio/${project.id}/`}
+		  />
+		))
+	  }
+	</ProjectCardGrid>
+  </div>
+</BaseLayout>
+
+<style>
+  .portfolio-page {
+    padding-block: var(--space-3xl) var(--space-4xl);
+  }
+
+  .portfolio-header {
+    max-width: 48rem;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .portfolio-header h1 {
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-size-3xl);
+  }
+
+  .introduction {
+    max-width: 42rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+interface TableRow {
+  cells: string[];
+}
+
+interface Props {
+  headers: string[];
+  rows: TableRow[];
+
+  caption?: string;
+
+  borders?: 'all' | 'rows' | 'none';
+  striped?: boolean;
+  density?: 'compact' | 'comfortable';
+  width?: Width;
+}
+
+const {
+  headers,
+  rows,
+  caption,
+  borders = 'rows',
+  striped = false,
+  density = 'comfortable',
+  width = 'reading',
+} = Astro.props;
+
+const tableClasses = [
+  'data-table',
+  `borders-${borders}`,
+  `density-${density}`,
+  striped ? 'is-striped' : '',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<div class="table-wrapper">
+  <table class={tableClasses}>
+    {
+      caption && (
+        <caption>{caption}</caption>
+      )
+    }
+
+    <thead>
+      <tr>
+        {
+          headers.map((header) => (
+            <th scope="col">{header}</th>
+          ))
+        }
+      </tr>
+    </thead>
+
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            {
+              row.cells.map((cell) => (
+                <td>{cell}</td>
+              ))
+            }
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+
+  .table-wrapper {
+	max-width: var(--comp-width);
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+	margin-bottom: var(--space-lg);
+    border-collapse: collapse;
+    background: var(--color-surface);
+  }
+
+  .data-table caption {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    text-align: left;
+  }
+
+  .data-table th {
+    color: var(--theme-dark);
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .data-table th,
+  .data-table td {
+    vertical-align: top;
+  }
+
+  .density-compact th,
+  .density-compact td {
+    padding: var(--space-sm);
+  }
+
+  .density-comfortable th,
+  .density-comfortable td {
+    padding: var(--space-md);
+  }
+
+  .borders-all th,
+  .borders-all td {
+    border: 1px solid var(--color-border);
+  }
+
+  .borders-rows th,
+  .borders-rows td {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .borders-none th,
+  .borders-none td {
+    border: 0;
+  }
+
+  .is-striped tbody tr:nth-child(even) {
+    background: var(--color-surface-subtle);
+  }
+  
+</style>

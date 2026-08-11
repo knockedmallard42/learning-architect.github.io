@@ -1,0 +1,118 @@
+---
+interface TimelineItem {
+	title: string;
+	description?: string;
+}
+
+interface Props {
+	items: TimelineItem[];
+}
+
+const {
+	items,
+} = Astro.props;
+---
+
+<ol class="timeline">
+  {
+    items.map((item, index) => (
+      <li class="timeline-item">
+        <div class="timeline-marker" aria-hidden="true">
+          {(index + 1).toString().padStart(2, '0')}
+        </div>
+
+        <div class="timeline-content">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+	.timeline {
+	  display: grid;
+	  gap: 0;
+
+	  max-width: var(--reading-width);
+
+	  margin: 0;
+	  padding: 0;
+
+	  list-style: none;
+	}
+
+	.timeline-item {
+	  position: relative;
+
+	  display: grid;
+	  grid-template-columns: 4rem minmax(0, 1fr);
+	  gap: var(--space-lg);
+
+	  padding-bottom: var(--space-2xl);
+	}
+
+	.timeline-item:last-child {
+	  padding-bottom: 0;
+	}
+
+	.timeline-item::before {
+	  content: "";
+
+	  position: absolute;
+
+	  top: 3rem;
+	  bottom: 0;
+	  left: 1.5rem;
+
+	  width: 0.15rem;
+
+	  background: var(--theme-light);
+	}
+
+	.timeline-item:last-child::before {
+	  display: none;
+	}
+
+	.timeline-marker {
+	  position: relative;
+	  z-index: 1;
+
+	  display: grid;
+	  place-items: center;
+
+	  width: 3rem;
+	  height: 3rem;
+
+	  border-radius: 50%;
+
+	  background: var(--theme-dark);
+	  color: var(--color-white);
+
+	  font-family: var(--font-mono);
+	  font-size: var(--font-size-sm);
+	  font-weight: 650;
+	}
+
+	.timeline-content {
+	  padding-top: 0.2rem;
+	}
+
+	.timeline-content h3 {
+	  margin-bottom: var(--space-sm);
+
+	  color: var(--theme-dark);
+
+	  font-family: var(--font-body);
+	  font-size: var(--font-size-xl);
+	}
+
+	.timeline-content p {
+	  margin: 0;
+
+	  color: var(--color-text-muted);
+	  line-height: 1.7;
+	}
+	
+</style>

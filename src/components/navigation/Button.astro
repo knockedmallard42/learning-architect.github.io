@@ -1,0 +1,133 @@
+---
+export type ButtonIntent =
+	| 'primary'
+	| 'secondary'
+	| 'creative'
+	| 'minimal'
+
+interface Props {
+	linkLabel: string;
+	href: string;
+	
+	theme?: Theme;
+	tone?: Tone;
+	intent?: ButtonIntent;
+}
+
+const {
+	linkLabel,
+	href,
+	theme = 'steel',
+	tone = 'light',
+	intent = 'primary',
+} = Astro.props;
+
+const buttonClasses = [
+	'button',
+	`theme-${theme}`,
+	`tone-${tone}`,
+	`intent-${intent}`,
+]
+	.join(' ');
+---
+
+<a class={buttonClasses} href={href}>
+	{linkLabel}
+	
+	{
+		intent === 'minimal' && (
+			<span aria-hidden="true">→</span>
+		)
+	}
+	
+</a>
+
+<style>
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-xs);
+		
+		min-height: var(--space-2xl);
+		padding-inline: var(--space-lg);
+		
+		border: 1px solid transparent;
+		border-radius: 0.85rem;
+		
+		font-weight: 700;
+		text-decoration: none;
+		
+		transition:
+			background-color 150ms ease,
+			border-color 150ms ease,
+			color 150ms ease,
+			box-shadow 150ms ease,
+			transform 150ms ease;
+	}
+	
+	.intent-primary {
+		background: var(--tone-background);
+		color: var(--tone-foreground);
+	}
+	
+	.intent-primary:hover {
+		background: var(--tone-hover);
+		color: var(--tone-foreground);
+		box-shadow: var(--shadow-sm);
+		transform: translateY(-0.1rem);
+	}
+	
+	.intent-secondary {
+		border-color: var(--theme-dark);
+		background: var(--color-white);
+		color: var(--theme-dark);
+	}
+	
+	.intent-secondary:hover {
+		background: var(--theme-soft);
+		color: var(--theme-medium);
+		transform: translateY(-0.1rem);
+	}
+	
+	.intent-creative {
+		background: var(--tone-background);
+		color: var(--tone-foreground);
+		transform: rotate(-2deg);
+	}
+	
+	.intent-creative:hover {
+		background: var(--tone-hover);
+		color: var(--tone-foreground);
+		box-shadow: var(--shadow-sm);
+		transform: rotate(0deg) translateY(-0.1rem);
+	}
+	
+	.intent-minimal {
+		min-height: auto;
+		padding-inline: 0;
+		border: 0;
+		background: transparent;
+		color: var(--theme-dark);
+	}
+	
+	.intent-minimal:hover {
+		background: transparent;
+		color: var(--theme-medium);
+	}
+	
+	.intent-minimal span {
+		transition: transform 150ms ease;
+	}
+	
+	.intent-minimal:hover span{
+		transform: translateX(0.25rem);
+	}
+	
+	@media (max-width: 45rem) {
+		.button {
+			width: 100%;
+		}
+	}
+
+</style>

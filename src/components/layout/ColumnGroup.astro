@@ -1,0 +1,75 @@
+---
+interface ColumnContent {
+	title?: string;
+	type: 'content' | 'unordered' | 'ordered';
+	items: string[];
+}
+
+interface Props {
+	sections: ColumnContent[];
+}
+
+const {
+	sections,
+} = Astro.props;
+---
+
+<section class="column-group">
+  {
+    sections.map((section) => (
+      <section class="column-content">
+		{section.title && (
+			<h3>{section.title}</h3>
+		)}
+
+        {section.type === 'content' && (
+          <div class="column-body">
+            {section.items.map((item) => (
+              <p>{item}</p>
+            ))}
+          </div>
+        )}
+
+        {section.type === 'unordered' && (
+          <ul>
+            {section.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )}
+
+        {section.type === 'ordered' && (
+          <ol>
+            {section.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ol>
+        )}
+      </section>
+    ))
+  }
+</section>
+
+<style>
+  
+  .column-group {
+    display: grid;
+	grid-template-columns: repeat(
+	  auto-fit,
+	  minmax(14rem, 1fr)
+	);
+	gap: var(--space-lg);
+  }
+  
+  .column-content {
+    min-width: 0;
+  }
+  
+  .column-content h3 {
+    margin-bottom: var(--space-md);
+	color: var(--theme-dark);
+	font-family: var(--font-body);
+	font-size: var(--font-size-lg);
+  }
+  
+</style>

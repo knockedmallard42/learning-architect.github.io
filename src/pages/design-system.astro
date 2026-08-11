@@ -1,0 +1,864 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/content/ProjectCard.astro';
+import ProjectCardGrid from '../components/content/ProjectCardGrid.astro';
+import Button from '../components/navigation/Button.astro';
+import ButtonGroup from '../components/navigation/ButtonGroup.astro';
+import CalloutFrame from '../components/layout/CalloutFrame.astro';
+
+const colors = [
+  {
+    name: 'Steel',
+    type: 'Primary',
+    description:
+      'Clarity, structure, navigation, links, and primary actions.',
+    swatches: [
+      { name: '800', value: '#21475d' },
+      { name: '700', value: '#28536b' },
+      { name: '600', value: '#356985' },
+      { name: '400', value: '#6f99ae' },
+      { name: '200', value: '#b8d0db' },
+      { name: '100', value: '#dce9ee' },
+    ],
+  },
+  {
+    name: 'Sage',
+    type: 'Primary',
+    description:
+      'Learning, growth, support, process, and human-centered work.',
+    swatches: [
+      { name: '800', value: '#4e6547' },
+      { name: '700', value: '#5e7555' },
+      { name: '500', value: '#7d9571' },
+      { name: '300', value: '#afbea7' },
+      { name: '200', value: '#cfdbc9' },
+      { name: '100', value: '#e7ede3' },
+    ],
+  },
+  {
+    name: 'Plum',
+    type: 'Secondary',
+    description:
+      'Creative emphasis and expressive details. Its warm hue distinguishes it from steel.',
+    swatches: [
+      { name: '800', value: '#63385d' },
+      { name: '700', value: '#75446d' },
+      { name: '500', value: '#9a5f91' },
+      { name: '300', value: '#c69bbe' },
+      { name: '100', value: '#f1e3ee' },
+    ],
+  },
+  {
+    name: 'Gold',
+    type: 'Secondary',
+    description:
+      'Highlights, milestones, featured information, and moments of warmth.',
+    swatches: [
+      { name: '700', value: '#8d6326' },
+      { name: '600', value: '#a9782f' },
+      { name: '500', value: '#c99a4a' },
+      { name: '300', value: '#dfbe7f' },
+      { name: '100', value: '#f6ead2' },
+    ],
+  },
+  {
+    name: 'Coral',
+    type: 'Secondary',
+    description:
+      'Approachable emphasis, editorial illustration, and occasional calls to attention.',
+    swatches: [
+      { name: '700', value: '#914d46' },
+      { name: '600', value: '#a85e55' },
+      { name: '500', value: '#c9796f' },
+      { name: '300', value: '#dfa9a2' },
+      { name: '100', value: '#f5e2df' },
+    ],
+  },
+  {
+    name: 'Granite',
+    type: 'Neutral',
+    description:
+      'Primarily used as ink, typography, borders, and supporting structure.',
+    swatches: [
+      { name: '950', value: '#222428' },
+      { name: '800', value: '#3d4147' },
+      { name: '600', value: '#666c73' },
+      { name: '400', value: '#969ba0' },
+      { name: '200', value: '#dadcdd' },
+      { name: '100', value: '#eceeed' },
+    ],
+  },
+  {
+    name: 'Paper',
+    type: 'Neutral',
+    description:
+      'Warm backgrounds that feel more editorial than clinical.',
+    swatches: [
+      { name: '50', value: '#fcfaf5' },
+      { name: '100', value: '#f4efe6' },
+      { name: '200', value: '#eae2d5' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Workbench"
+  description="Working designs for Russ Designs."
+  noIndex={true}
+>
+  <div class="container system-page">
+    <header class="page-introduction">
+      <div class="introduction-copy">
+        <p class="eyebrow">Working reference</p>
+
+        <h1>Russ Designs studio</h1>
+
+        <p class="introduction">
+          A living collection of the visual and interaction decisions used
+          throughout the portfolio. The system combines editorial warmth,
+          playful composition, and technical clarity.
+        </p>
+      </div>
+
+      <div class="introduction-mark" aria-hidden="true">
+        <span class="mark-piece mark-steel"></span>
+        <span class="mark-piece mark-sage"></span>
+        <span class="mark-piece mark-plum"></span>
+        <span class="mark-piece mark-gold"></span>
+      </div>
+    </header>
+
+    <nav class="section-navigation" aria-label="Design system sections">
+      <a href="#principles">Principles</a>
+      <a href="#colors">Colors</a>
+      <a href="#typography">Typography</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#cards">Cards</a>
+    </nav>
+
+    <section id="principles" class="system-section">
+      <div class="section-heading">
+        <p class="section-number">01</p>
+
+        <div>
+          <h2>Brand principles</h2>
+          <p>The qualities each design decision should reinforce.</p>
+        </div>
+      </div>
+
+      <div class="principle-grid">
+        <article class="principle principle-steel">
+          <span class="principle-number">01</span>
+          <h3>Structured</h3>
+          <p>
+            Information should feel intentionally organized without becoming
+            rigid, bureaucratic, or visually dense.
+          </p>
+        </article>
+
+        <article class="principle principle-sage">
+          <span class="principle-number">02</span>
+          <h3>Clear</h3>
+          <p>
+            Visual hierarchy should help people understand where they are,
+            what matters, and what they can do next.
+          </p>
+        </article>
+
+        <article class="principle principle-plum">
+          <span class="principle-number">03</span>
+          <h3>Human</h3>
+          <p>
+            Technical precision should coexist with warmth, curiosity, and
+            respect for the person using the system.
+          </p>
+        </article>
+
+        <article class="principle principle-gold">
+          <span class="principle-number">04</span>
+          <h3>Constructed</h3>
+          <p>
+            Components should visibly relate to one another, suggesting
+            architecture, modularity, and thoughtful assembly.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="colors" class="system-section">
+      <div class="section-heading">
+        <p class="section-number">02</p>
+
+        <div>
+          <h2>Color</h2>
+          <p>
+            Two primary colors supported by expressive editorial accents and
+            warm neutral ink.
+          </p>
+        </div>
+      </div>
+
+      <div class="color-groups">
+        {
+          colors.map((group) => (
+            <article class="color-group">
+              <div class="color-description">
+                <p class="color-type">{group.type}</p>
+                <h3>{group.name}</h3>
+                <p>{group.description}</p>
+              </div>
+
+              <div class="swatch-grid">
+                {group.swatches.map((swatch) => (
+                  <div class="swatch">
+                    <div
+                      class="swatch-color"
+                      style={`--swatch-color: ${swatch.value}`}
+                    ></div>
+
+                    <div class="swatch-information">
+                      <strong>{swatch.name}</strong>
+                      <code>{swatch.value}</code>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <aside class="accessibility-note">
+        <p class="eyebrow">Color accessibility</p>
+
+        <h3>Meaning should never depend on hue alone.</h3>
+
+        <p>
+          Categories and states will also use text labels, icons, patterns,
+          borders, or changes in shape. Steel and plum are intentionally
+          separated by both warmth and lightness, but they will not be the only
+          indicators used.
+        </p>
+      </aside>
+    </section>
+
+    <section id="typography" class="system-section">
+      <div class="section-heading">
+        <p class="section-number">03</p>
+
+        <div>
+          <h2>Typography</h2>
+          <p>
+            Expressive editorial display type paired with clear, approachable
+            body text and technical annotation.
+          </p>
+        </div>
+      </div>
+
+      <div class="type-specimens">
+        <article class="type-specimen display-specimen">
+          <div class="specimen-label">
+            <span>Fraunces Variable</span>
+            <code>Display / 2.7–5.5rem</code>
+          </div>
+
+          <p class="display-sample">
+            Complex systems made understandable.
+          </p>
+        </article>
+
+        <article class="type-specimen">
+          <div class="specimen-label">
+            <span>Source Sans 3 Variable</span>
+            <code>Section heading / 1.8–2.5rem</code>
+          </div>
+
+          <p class="section-sample">
+            Learning architecture and technical design
+          </p>
+        </article>
+
+        <article class="type-specimen">
+          <div class="specimen-label">
+            <span>Source Sans 3 Variable</span>
+            <code>Body / 1.2rem × 1.6</code>
+          </div>
+
+          <p class="body-sample">
+            Effective learning systems do more than present information. They
+            create structure, reveal relationships, support decisions, and
+            help people apply what they understand.
+          </p>
+        </article>
+
+        <article class="type-specimen">
+          <div class="specimen-label">
+            <span>IBM Plex Mono Variable</span>
+            <code>Technical label / 0.78rem</code>
+          </div>
+
+          <p class="technical-sample">
+            SYSTEM / COMPONENT / VERSION 01
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="buttons" class="system-section">
+      <div class="section-heading">
+        <p class="section-number">04</p>
+
+        <div>
+          <h2>Buttons and links</h2>
+          <p>
+            Actions should be distinct and inviting without overwhelming the
+            surrounding content.
+          </p>
+        </div>
+      </div>
+
+      <CalloutFrame
+		theme="steel"
+	  
+		border="dashed"
+		surface="tinted"
+	  >
+        <ButtonGroup>
+
+		  <Button
+			linkLabel="View project"
+			href="#buttons"
+		  
+			theme="steel"
+			tone="dark"
+			intent="primary"
+		  />
+		  
+		  <Button
+			linkLabel="Read case study"
+			href="#buttons"
+			
+			theme="sage"
+			intent="secondary"
+		/>
+		
+		<Button
+			linkLabel="Explore the process"
+			href="#buttons"
+			
+			theme="plum"
+			tone="medium"
+			intent="creative"
+		/>
+		
+		<Button
+			linkLabel="See how it works"
+			href="#buttons"
+			
+			theme="steel"
+			intent="minimal"
+		/>
+		
+        </ButtonGroup>
+      </CalloutFrame>
+    </section>
+	
+	<section id="cards" class="system-section">
+	  <div class="section-heading">
+		<p class="section-number">05</p>
+
+		<div>
+		  <h2>Project cards</h2>
+		  <p>
+			Editorial previews that give project descriptions more space than
+			decorative imagery.
+		  </p>
+		</div>
+	  </div>
+
+	  <ProjectCardGrid columns={2}>
+		<ProjectCard
+		  title="Healthcare onboarding architecture"
+		  category="Instructional design"
+		  description="A fictionalized case study demonstrating the structure, interactions, and visual system of a protected client project."
+		  href="#cards"
+		  linkLabel="View case study"
+		  artLabel="Learning system"
+		  theme="steel"
+		  artwork=""
+		/>
+
+		<ProjectCard
+		  title="Modular foundation packages"
+		  category="Software architecture"
+		  description="A reusable architecture for logging, save systems, lifecycle management, validation, and deterministic simulation."
+		  href="#cards"
+		  linkLabel="View project"
+		  artLabel="Technical system"
+		  theme="sage"
+		  artwork="software"
+		/>
+		
+		<ProjectCard
+  title="Course resource library"
+  category="Resources"
+  description="A collection of reusable course assets and supporting materials."
+  href="/resources/"
+  theme="plum"
+  artwork="software"
+  artTone="dark"
+/>
+
+		<ProjectCard
+		  title="Reusable procedure publishing"
+		  category="Technical communication"
+		  description="A structured publishing workflow for maintaining shared content across policies, procedures, and quick-reference materials."
+		  href="#cards"
+		  linkLabel="Explore the workflow"
+		  artLabel="Documentation system"
+		  theme="plum"
+		  artwork="documentation"
+		/>
+
+		<ProjectCard
+		  title="Learning experience redesign"
+		  category="Learning architecture"
+		  description="A redesign focused on reducing cognitive friction, clarifying learner decisions, and connecting instruction to practical application."
+		  href="#cards"
+		  linkLabel="View redesign"
+		  artLabel="Experience design"
+		  theme="gold"
+		  artwork="learning"
+		/>
+		
+		<ProjectCard
+		  title="Example project"
+		  category="Instructional design"
+		  description="Project description."
+		  href="/portfolio/example/"
+		  theme="plum"
+		  artwork="software"
+		/>
+	  </ProjectCardGrid>
+	</section>
+  </div>
+</BaseLayout>
+
+<style>
+  .system-page {
+    padding-block: var(--space-3xl) var(--space-4xl);
+  }
+
+  .page-introduction {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.38fr);
+    align-items: center;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .introduction-copy {
+    max-width: 54rem;
+  }
+
+  .page-introduction h1 {
+    max-width: 12ch;
+    margin-bottom: var(--space-lg);
+    font-size: var(--font-size-3xl);
+  }
+
+  .introduction {
+    max-width: 44rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .introduction-mark {
+    position: relative;
+    min-height: 22rem;
+  }
+
+  .mark-piece {
+    position: absolute;
+    display: block;
+    border-radius: var(--radius-xl);
+  }
+
+  .mark-steel {
+    top: 1rem;
+    right: 0;
+    width: 10rem;
+    height: 14rem;
+    background: var(--color-steel-400);
+    transform: rotate(8deg);
+  }
+
+  .mark-sage {
+    right: 7rem;
+    bottom: 1rem;
+    width: 9rem;
+    height: 10rem;
+    background: var(--color-sage-300);
+    transform: rotate(-9deg);
+  }
+
+  .mark-plum {
+    top: 7rem;
+    right: 8.5rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background: var(--color-plum-500);
+  }
+
+  .mark-gold {
+    right: 1rem;
+    bottom: 0;
+    width: 7rem;
+    height: 5rem;
+    background: var(--color-gold-300);
+    transform: rotate(5deg);
+  }
+
+  .section-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 82%);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-navigation a {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .section-navigation a:hover {
+    background: var(--color-steel-100);
+    color: var(--color-steel-800);
+  }
+
+  .system-section {
+    padding-block: var(--space-4xl);
+    border-bottom: 1px solid var(--color-border);
+    scroll-margin-top: var(--space-xl);
+  }
+
+  .system-section:last-child {
+    border-bottom: 0;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .section-heading h2 {
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-heading div > p {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .section-number {
+    margin: 0;
+    padding-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+  }
+
+  /* Principles */
+
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .principle {
+    min-height: 14rem;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .principle:nth-child(1) {
+    grid-column: span 7;
+  }
+
+  .principle:nth-child(2) {
+    grid-column: span 5;
+    margin-top: var(--space-xl);
+  }
+
+  .principle:nth-child(3) {
+    grid-column: span 5;
+  }
+
+  .principle:nth-child(4) {
+    grid-column: span 7;
+    margin-top: calc(var(--space-xl) * -1);
+  }
+
+  .principle-steel {
+    background: var(--color-steel-100);
+  }
+
+  .principle-sage {
+    background: var(--color-sage-100);
+  }
+
+  .principle-plum {
+    background: var(--color-plum-100);
+  }
+
+  .principle-gold {
+    background: var(--color-gold-100);
+  }
+
+  .principle-number {
+    display: block;
+    margin-bottom: var(--space-2xl);
+    color: var(--color-granite-600);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .principle h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    font-variation-settings:
+      "SOFT" 60,
+      "WONK" 1,
+      "opsz" 48;
+  }
+
+  .principle p {
+    max-width: 34rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Colors */
+
+  .color-groups {
+    display: grid;
+    gap: var(--space-3xl);
+  }
+
+  .color-group {
+    display: grid;
+    grid-template-columns: minmax(13rem, 0.35fr) 1fr;
+    gap: var(--space-xl);
+  }
+
+  .color-description h3 {
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-xl);
+  }
+
+  .color-description > p:last-child {
+    color: var(--color-text-muted);
+  }
+
+  .color-type {
+    margin-bottom: var(--space-xs);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .swatch {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .swatch-color {
+    height: 6rem;
+    background: var(--swatch-color);
+  }
+
+  .swatch-information {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-sm);
+  }
+
+  .swatch-information code {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .accessibility-note {
+    max-width: 52rem;
+    margin-top: var(--space-3xl);
+    margin-left: auto;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border-radius: var(--radius-xl);
+    background: var(--color-plum-100);
+  }
+
+  .accessibility-note h3 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+  }
+
+  .accessibility-note > p:last-child {
+    max-width: 42rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Typography */
+
+  .type-specimens {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .type-specimen {
+    padding-block: var(--space-2xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .display-specimen {
+    padding: var(--space-2xl);
+    border: 0;
+    border-radius: var(--radius-xl);
+    background: var(--color-sage-100);
+  }
+
+  .specimen-label {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .display-sample {
+    max-width: 15ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-3xl);
+    font-variation-settings:
+      "SOFT" 80,
+      "WONK" 1,
+      "opsz" 72;
+    font-weight: 650;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .section-sample {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--font-size-2xl);
+    font-weight: 720;
+    line-height: 1.15;
+  }
+
+  .body-sample {
+    max-width: 42rem;
+    font-size: var(--font-size-lg);
+  }
+
+  .technical-sample {
+    margin: 0;
+    color: var(--color-plum-700);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Responsive */
+
+  @media (max-width: 60rem) {
+    .page-introduction {
+      grid-template-columns: 1fr;
+    }
+
+    .introduction-mark {
+      min-height: 13rem;
+      max-width: 24rem;
+    }
+
+    .principle:nth-child(1),
+    .principle:nth-child(2),
+    .principle:nth-child(3),
+    .principle:nth-child(4) {
+      grid-column: span 6;
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 45rem) {
+    .system-page {
+      padding-block: var(--space-2xl);
+    }
+
+    .system-section {
+      padding-block: var(--space-3xl);
+    }
+
+    .section-heading,
+    .color-group {
+      grid-template-columns: 1fr;
+    }
+
+    .section-number {
+      margin-bottom: calc(var(--space-sm) * -1);
+    }
+
+    .principle-grid,
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .principle:nth-child(n) {
+      grid-column: auto;
+      min-height: auto;
+      margin-top: 0;
+    }
+
+    .principle-number {
+      margin-bottom: var(--space-lg);
+    }
+
+    .specimen-label {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .text-link {
+      margin-top: var(--space-sm);
+    }
+  }
+</style>
