@@ -1,0 +1,53 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import SCORMViewer from '../media/SCORMViewer.astro';
+
+interface Props {
+	id: string;
+	title: string;
+	category: string;
+	description: string;
+	src: string;
+	
+	theme?: Theme;
+	artwork?: ProjectArtwork;
+	artTone?: Tone;
+	
+	artLabel?: string;
+	linkLabel?: string;
+}
+
+const {
+	id,
+	title,
+	category,
+	description,
+	src,
+	
+	theme = 'steel',
+	artwork = 'learning',
+	artTone = 'light',
+	
+	artLabel = category,
+	linkLabel = 'Launch course',
+} = Astro.props;
+---
+
+<ProjectCard
+  title={title}
+  category={category}
+  description={description}
+  theme={theme}
+  artwork={artwork}
+  artTone={artTone}
+  artLabel={artLabel}
+>
+  <SCORMViewer
+    slot="action"
+    id={id}
+    title={title}
+    src={src}
+    buttonLabel={linkLabel}
+	theme={theme}
+  />
+</ProjectCard>

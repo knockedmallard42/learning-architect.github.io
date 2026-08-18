@@ -199,35 +199,44 @@ const colors = [
         </div>
       </div>
 
-      <div class="color-groups">
-        {
-          colors.map((group) => (
-            <article class="color-group">
-              <div class="color-description">
-                <p class="color-type">{group.type}</p>
-                <h3>{group.name}</h3>
-                <p>{group.description}</p>
-              </div>
+<div class="color-groups">
+  {
+    colors.map((group) => (
+      <article class="color-group">
+        <div class="color-description">
+          <p class="color-type">{group.type}</p>
+          <h3>{group.name}</h3>
+          <p>{group.description}</p>
+        </div>
 
-              <div class="swatch-grid">
-                {group.swatches.map((swatch) => (
-                  <div class="swatch">
-                    <div
-                      class="swatch-color"
-                      style={`--swatch-color: ${swatch.value}`}
-                    ></div>
+        <div class="swatch-grid">
+          {
+            group.swatches.map((swatch) => (
+              <button
+                class="swatch"
+                type="button"
+                data-copy-color={swatch.value}
+                aria-label={`Copy ${swatch.value} to clipboard`}
+                title={`Copy ${swatch.value}`}
+              >
+                <div
+                  class="swatch-color"
+                  style={`--swatch-color: ${swatch.value}`}
+                  aria-hidden="true"
+                ></div>
 
-                    <div class="swatch-information">
-                      <strong>{swatch.name}</strong>
-                      <code>{swatch.value}</code>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </article>
-          ))
-        }
-      </div>
+                <div class="swatch-information">
+                  <strong>{swatch.name}</strong>
+                  <code>{swatch.value}</code>
+                </div>
+              </button>
+            ))
+          }
+        </div>
+      </article>
+    ))
+  }
+</div>
 
       <aside class="accessibility-note">
         <p class="eyebrow">Color accessibility</p>
@@ -327,7 +336,7 @@ const colors = [
         <ButtonGroup>
 
 		  <Button
-			linkLabel="View project"
+			linkLabel="primary"
 			href="#buttons"
 		  
 			theme="steel"
@@ -336,7 +345,7 @@ const colors = [
 		  />
 		  
 		  <Button
-			linkLabel="Read case study"
+			linkLabel="secondary"
 			href="#buttons"
 			
 			theme="sage"
@@ -344,7 +353,7 @@ const colors = [
 		/>
 		
 		<Button
-			linkLabel="Explore the process"
+			linkLabel="creative"
 			href="#buttons"
 			
 			theme="plum"
@@ -353,7 +362,7 @@ const colors = [
 		/>
 		
 		<Button
-			linkLabel="See how it works"
+			linkLabel="minimal"
 			href="#buttons"
 			
 			theme="steel"
@@ -362,6 +371,18 @@ const colors = [
 		
         </ButtonGroup>
       </CalloutFrame>
+	  
+	  <p>Button component options</p>
+	  <ul>
+		<li>linkLabel: string</li>
+		<li>href?: string</li>
+		<li>type?: 'link' | 'button' , 'link' default</li>
+		<li>theme?: Theme, 'steel' default</li>
+		<li>tone?: Tone, 'light' default</li>
+		<li>intent?: (see above), 'primary' default</li>
+		<li>dataArtifactOpen</li>
+	  </ul>
+	  
     </section>
 	
 	<section id="cards" class="system-section">
@@ -690,13 +711,38 @@ const colors = [
     gap: var(--space-sm);
   }
 
-  .swatch {
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
-  }
+.swatch {
+  overflow: hidden;
+
+  width: 100%;
+  padding: 0;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  background: var(--color-surface);
+  color: inherit;
+
+  font: inherit;
+  text-align: left;
+
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.swatch:hover {
+  transform: translateY(-0.1rem);
+  box-shadow: var(--shadow-md);
+}
+
+.swatch:focus-visible {
+  outline: 0.2rem solid var(--color-accent);
+  outline-offset: 0.2rem;
+}
 
   .swatch-color {
     height: 6rem;
@@ -862,3 +908,43 @@ const colors = [
     }
   }
 </style>
+
+<script>
+  const swatches =
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-color]');
+
+  swatches.forEach((swatch) => {
+    let resetTimer: number | undefined;
+
+    swatch.addEventListener('click', async () => {
+      const color = swatch.dataset.copyColor;
+      const code = swatch.querySelector('code');
+
+      if (!color || !code) return;
+
+      try {
+        await navigator.clipboard.writeText(color);
+
+        code.textContent = 'Copied!';
+        swatch.setAttribute(
+          'aria-label',
+          `${color} copied to clipboard`
+        );
+
+        if (resetTimer) {
+          window.clearTimeout(resetTimer);
+        }
+
+        resetTimer = window.setTimeout(() => {
+          code.textContent = color;
+          swatch.setAttribute(
+            'aria-label',
+            `Copy ${color} to clipboard`
+          );
+        }, 1200);
+      } catch (error) {
+        console.error('Could not copy color:', error);
+      }
+    });
+  });
+</script>

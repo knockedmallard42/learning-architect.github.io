@@ -1,0 +1,53 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import PDFViewer from '../media/PDFViewer.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  src: string;
+
+  theme?: Theme;
+  artwork?: ProjectArtwork;
+  artTone?: Tone;
+
+  artLabel?: string;
+  linkLabel?: string;
+}
+
+const {
+  id,
+  title,
+  category,
+  description,
+  src,
+
+  theme = 'steel',
+  artwork = 'documentation',
+  artTone = 'light',
+
+  artLabel = category,
+  linkLabel = 'View PDF',
+} = Astro.props;
+---
+
+<ProjectCard
+  title={title}
+  category={category}
+  description={description}
+  theme={theme}
+  artwork={artwork}
+  artTone={artTone}
+  artLabel={artLabel}
+>
+  <PDFViewer
+    slot="action"
+    id={id}
+    title={title}
+    src={src}
+    buttonLabel={linkLabel}
+	theme={theme}
+  />
+</ProjectCard>

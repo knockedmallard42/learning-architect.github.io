@@ -1,0 +1,54 @@
+---
+import ArtifactDialog from './ArtifactDialog.astro';
+import Button from '../navigation/Button.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  src: string;
+  buttonLabel?: string;
+  
+  theme?: Theme;
+}
+
+const {
+  id,
+  title,
+  src,
+  buttonLabel = 'Launch course',
+  
+  theme,
+} = Astro.props;
+---
+
+<Button
+	linkLabel={buttonLabel}
+	type="button"
+	theme={theme}
+	intent="minimal"
+	dataArtifactOpen={id}
+/>
+
+<ArtifactDialog
+  id={id}
+  title={title}
+  eyebrow="Interactive course"
+>
+  <iframe
+    class="scorm-frame"
+    src={src}
+    title={title}
+    allowfullscreen
+  ></iframe>
+</ArtifactDialog>
+
+<style>
+	.scorm-frame {
+  display: block;
+
+  width: 100%;
+  height: min(75vh, 50rem);
+
+  border: 0;
+}
+</style>

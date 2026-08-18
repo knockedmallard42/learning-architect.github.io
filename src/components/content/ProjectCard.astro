@@ -9,7 +9,7 @@ interface Props {
   title: string;
   category: string;
   description: string;
-  href: string;
+  href?: string;
 
   linkLabel?: string;
   artLabel?: string;
@@ -33,6 +33,8 @@ const {
   artTone = 'light',
   featured = false,
 } = Astro.props;
+
+const hasActionSlot = Astro.slots.has('action');
 
 const cardClasses = [
   'project-card',
@@ -84,19 +86,28 @@ const cardClasses = [
     <p class="card-category">{category}</p>
 
     <h3>
-      <a href={href}>
-        {title}
-      </a>
+      {
+		href
+			? <a href={href}>{title}</a>
+			: title
+	  }
     </h3>
 
     <p class="card-description">
       {description}
     </p>
 
-    <a class="card-link" href={href}>
-      {linkLabel}
-      <span aria-hidden="true">→</span>
-    </a>
+    {
+		hasActionSlot ? (
+			<slot name="action" />
+		) : href ? (
+			<a class="card-link" href={href}>
+				{linkLabel}
+				<span aria-hidden="true">→</span>
+			</a>
+		) : null
+	}
+	
   </div>
 </article>
 

@@ -1,0 +1,153 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  eyebrow?: string;
+}
+
+const {
+  id,
+  title,
+  eyebrow = 'Portfolio artifact',
+} = Astro.props;
+---
+
+<dialog
+  class="artifact-dialog"
+  data-artifact-dialog={id}
+  aria-label={title}
+>
+  <div class="artifact-window">
+    <header class="artifact-header">
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+      </div>
+
+      <button
+        type="button"
+        class="artifact-close"
+        data-artifact-close
+        aria-label={`Close ${title}`}
+      >
+        ×
+      </button>
+    </header>
+
+    <div class="artifact-content">
+      <slot />
+    </div>
+  </div>
+</dialog>
+
+<script>
+  function initializeArtifactDialogs() {
+    const launchButtons =
+      document.querySelectorAll<HTMLButtonElement>('[data-artifact-open]');
+
+    launchButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.artifactOpen;
+
+        if (!id) return;
+
+        const dialog =
+          document.querySelector<HTMLDialogElement>(
+            `[data-artifact-dialog="${id}"]`
+          );
+
+        dialog?.showModal();
+      });
+    });
+
+    const dialogs =
+      document.querySelectorAll<HTMLDialogElement>('[data-artifact-dialog]');
+
+    dialogs.forEach((dialog) => {
+      const closeButton =
+        dialog.querySelector<HTMLButtonElement>('[data-artifact-close]');
+
+      closeButton?.addEventListener('click', () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+  }
+
+  initializeArtifactDialogs();
+</script>
+
+<style>
+
+	.artifact-dialog {
+		width: var(--content-width);
+		
+		border: none;
+		padding: 0;
+		background: transparent;
+	}
+	
+	.eyebrow {
+		color: var(--theme-medium);
+		margin-left: var(--space-md);
+		margin-top: var(--space-lg);
+	}
+	
+	.artifact-header h2 {
+		font-size: var(--font-size-xl);
+		
+		margin-top: var(--space-sm);
+		margin-bottom: var(--spece-sm);
+		margin-left: var(--space-md);
+	}
+	
+	.artifact-window {
+  position: relative;
+
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.artifact-close {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 10;
+
+  display: grid;
+  place-items: center;
+
+  width: 2.75rem;
+  height: 2.75rem;
+
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+
+  font-size: 1.5rem;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.artifact-close:hover {
+  background: var(--theme-light);
+  color: var(--theme-dark);
+}
+
+.artifact-close:focus-visible {
+  outline: 0.2rem solid var(--theme-dark);
+  outline-offset: 0.2rem;
+}
+	
+</style>

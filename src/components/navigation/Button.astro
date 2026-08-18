@@ -7,7 +7,9 @@ export type ButtonIntent =
 
 interface Props {
 	linkLabel: string;
-	href: string;
+	href?: string;
+	
+	type?: 'link' | 'button';
 	
 	theme?: Theme;
 	tone?: Tone;
@@ -17,9 +19,11 @@ interface Props {
 const {
 	linkLabel,
 	href,
+	type = 'link',
 	theme = 'steel',
 	tone = 'light',
 	intent = 'primary',
+	dataArtifactOpen,
 } = Astro.props;
 
 const buttonClasses = [
@@ -31,16 +35,36 @@ const buttonClasses = [
 	.join(' ');
 ---
 
-<a class={buttonClasses} href={href}>
-	{linkLabel}
-	
-	{
-		intent === 'minimal' && (
-			<span aria-hidden="true">→</span>
-		)
-	}
-	
-</a>
+{
+	type === 'button' ? (
+		<button
+			class={buttonClasses}
+			type="button"
+			data-artifact-open={dataArtifactOpen}
+		>
+			{linkLabel}
+			
+			{
+				intent === 'minimal' && (
+					<span aria-hidden="true">→</span>
+				)
+			}
+		</button>
+	) : (
+		<a class={buttonClasses} href={href}>
+			{linkLabel}
+			
+			{
+				intent === 'minimal' && (
+					<span aria-hidden="true">→</span>
+				)
+			}
+			
+		</a>
+	)
+}
+
+
 
 <style>
 	.button {
