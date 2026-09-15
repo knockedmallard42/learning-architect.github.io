@@ -333,6 +333,11 @@ const cardClasses = [
   }
 
   .card-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     margin-bottom: var(--space-lg);
     color: var(--color-text-muted);
   }

@@ -1,4 +1,6 @@
 ---
+import CalloutFrame from '../layout/CalloutFrame.astro';
+
 interface SummarySection {
 	title: string;
 	items: string[];
@@ -12,6 +14,7 @@ interface Props {
 	label: string;
 	summaryHeading: string;
 	sections: SummarySection[];
+	nda?: boolean;
 }
 
 const {
@@ -22,6 +25,7 @@ const {
 	label,
 	summaryHeading,
 	sections,
+	nda = false,
 } = Astro.props;
 
 const summaryClasses = [
@@ -57,6 +61,19 @@ const summaryClasses = [
 		}
 	</div>
 </section>
+
+{
+	nda && (
+		<CalloutFrame theme="coral" surface="tinted" accent="left">
+			<h3>Confidentiality Agreement In Place</h3>
+			<p>
+				This project is based on professional work protected by confidentiality agreements.
+				Company names, branding, content, data, and identifying details have been replaced or adapted.
+			</p>
+			<p>The design decisions, process, and underlying solution reflect my original work.</p>
+		</CalloutFrame>
+	)
+}
 
 <style>
 	.project-summary {

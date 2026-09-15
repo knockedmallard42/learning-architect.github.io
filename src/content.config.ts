@@ -10,6 +10,7 @@ const portfolio = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    cardSummary: z.string().optional(),
     year: z.number(),
 
     category: z.string(),

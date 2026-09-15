@@ -30,7 +30,7 @@ const projects = await getCollection('portfolio');
 		  <ProjectCard
 			title={project.data.title}
 			category={project.data.category}
-			description={project.data.summary}
+			description={project.data.cardSummary ?? project.data.summary}
 			theme={project.data.theme}
 			artwork={project.data.artwork}
 			artTone={project.data.artTone}

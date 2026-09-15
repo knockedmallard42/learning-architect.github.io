@@ -1,0 +1,138 @@
+---
+import ArtifactDialog from '../media/ArtifactDialog.astro';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: string | number;
+  expandable?: boolean;
+  id?: string;
+  title?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  width = '100%',
+  expandable = false,
+  id,
+  title = caption || alt,
+} = Astro.props;
+
+if (expandable && !id) {
+  throw new Error('Figure requires an id when expandable is true.');
+}
+
+const figureWidth = typeof width === 'number' ? `${width}px` : width;
+---
+
+<figure class="image-figure" style={`--figure-width: ${figureWidth}`}>
+  {
+    expandable ? (
+      <button
+        type="button"
+        class="image-expand-button"
+        data-artifact-open={id}
+        aria-label={`Expand image: ${title}`}
+      >
+        <img src={src} alt={alt} loading="lazy" decoding="async" />
+        <span class="image-expand-hint" aria-hidden="true">Expand</span>
+      </button>
+    ) : (
+      <img src={src} alt={alt} loading="lazy" decoding="async" />
+    )
+  }
+
+  {caption && <figcaption class="image-caption">{caption}</figcaption>}
+</figure>
+
+{
+  expandable && id && (
+    <ArtifactDialog id={id} title={title} eyebrow="Image">
+      <div class="expanded-image">
+        <img src={src} alt={alt} />
+        {caption && <p class="image-caption">{caption}</p>}
+      </div>
+    </ArtifactDialog>
+  )
+}
+
+<style>
+  .image-figure {
+    width: min(100%, var(--figure-width));
+    margin: var(--space-xl) 0;
+  }
+
+  .image-figure > img,
+  .image-expand-button,
+  .image-expand-button img {
+    width: 100%;
+  }
+
+  .image-figure img {
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .image-expand-button {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-white);
+    text-align: left;
+  }
+
+  .image-expand-button:focus-visible {
+    outline: 0.2rem solid var(--theme-dark, var(--color-accent));
+    outline-offset: 0.2rem;
+  }
+
+  .image-expand-hint {
+    position: absolute;
+    right: var(--space-sm);
+    bottom: var(--space-sm);
+    padding: var(--space-2xs) var(--space-sm);
+    border-radius: var(--radius-pill);
+    background: rgb(34 36 40 / 82%);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(0.25rem);
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+
+  .image-expand-button:hover .image-expand-hint,
+  .image-expand-button:focus-visible .image-expand-hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .expanded-image {
+    display: grid;
+    place-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--color-surface-subtle);
+  }
+
+  .expanded-image img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(92vh - 10rem);
+    object-fit: contain;
+  }
+
+  .expanded-image .image-caption {
+    justify-self: start;
+    margin: 0;
+  }
+</style>

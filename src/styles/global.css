@@ -402,6 +402,14 @@ pre {
   text-transform: uppercase;
 }
 
+.image-caption {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+}
+
 /* ---------------------------------
    Accessibility
 --------------------------------- */

@@ -85,7 +85,9 @@ const {
 <style>
 
 	.artifact-dialog {
-		width: var(--content-width);
+		width: min(var(--content-width), calc(100% - 2rem));
+		max-width: none;
+		max-height: calc(100% - 2rem);
 		
 		border: none;
 		padding: 0;
