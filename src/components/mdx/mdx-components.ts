@@ -10,6 +10,7 @@ import DataTable from '../layout/DataTable.astro';
 import Button from '../navigation/Button.astro';
 import ButtonGroup from '../navigation/ButtonGroup.astro';
 import Figure from '../content/Figure.astro';
+import Callout from '../content/Callout.astro';
 
 export const mdxComponents = {
   ProjectSummary,
@@ -24,4 +25,5 @@ export const mdxComponents = {
   Button,
   ButtonGroup,
   Figure,
+  Callout,
 };

@@ -13,7 +13,7 @@
         <options>
           <option name="title_enabled" value="false">
             <options>
-              <option name="title_text" value="Edit Activity" />
+              <option name="title_text" value="Win Theme Activity" />
             </options>
           </option>
           <option name="logo_enabled" value="false">
@@ -1587,9 +1587,12 @@
   <nav_data>
     <outline>
       <links>
-        <slidelink slideid="_player.5x1B8MKy40W" displaytext="Intro Scene" expand="true" type="slide">
+        <slidelink slideid="_player.68kl4sColVB" displaytext="Intro Scene" expand="true" type="slide">
           <links>
-            <slidelink slideid="_player.5x1B8MKy40W.6F9rZmII0k9" displaytext="Intro Slide" expand="false" type="slide" />
+            <slidelink slideid="_player.68kl4sColVB.63FHswVtOsZ" displaytext="Win Theme" expand="false" type="slide" />
+            <slidelink slideid="_player.68kl4sColVB.5f8Kl4HobwP" displaytext="Win Theme" expand="false" type="slide" />
+            <slidelink slideid="_player.68kl4sColVB.5bWYbyrhYhZ" displaytext="Win Theme" expand="false" type="slide" />
+            <slidelink slideid="_player.68kl4sColVB.5YR1xmGjVTB" displaytext="Untitled Slide" expand="false" type="slide" />
           </links>
         </slidelink>
       </links>

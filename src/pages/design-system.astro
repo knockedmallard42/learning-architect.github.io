@@ -5,6 +5,7 @@ import ProjectCardGrid from '../components/content/ProjectCardGrid.astro';
 import Button from '../components/navigation/Button.astro';
 import ButtonGroup from '../components/navigation/ButtonGroup.astro';
 import CalloutFrame from '../components/layout/CalloutFrame.astro';
+import Callout from '../components/content/Callout.astro';
 
 const colors = [
   {
@@ -312,6 +313,12 @@ const colors = [
           </p>
         </article>
       </div>
+
+      <CalloutFrame theme="plum" surface="tinted" accent="left" width="reading">
+        <Callout>
+          Good learning design gives people the clarity and confidence to put knowledge into practice.
+        </Callout>
+      </CalloutFrame>
     </section>
 
     <section id="buttons" class="system-section">

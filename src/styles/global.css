@@ -199,7 +199,7 @@
 	}
 	
 	.width-reading {
-		--comp-width: var(--content-width);
+		--comp-width: var(--reading-width);
 		max-width: var(--comp-width);
 	}
 	
