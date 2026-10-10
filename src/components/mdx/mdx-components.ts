@@ -11,6 +11,9 @@ import Button from '../navigation/Button.astro';
 import ButtonGroup from '../navigation/ButtonGroup.astro';
 import Figure from '../content/Figure.astro';
 import Callout from '../content/Callout.astro';
+import MetricCallout from '../content/MetricCallout.astro';
+import EditorialMap from '../content/EditorialMap.astro';
+import EditorialCards from '../content/EditorialCards.astro';
 
 export const mdxComponents = {
   ProjectSummary,
@@ -26,4 +29,7 @@ export const mdxComponents = {
   ButtonGroup,
   Figure,
   Callout,
+  MetricCallout,
+  EditorialMap,
+  EditorialCards,
 };

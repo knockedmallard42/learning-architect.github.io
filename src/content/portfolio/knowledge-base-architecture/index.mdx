@@ -99,4 +99,268 @@ I inventoried operational resources across the franchisee-facing file system, LM
 
 I also printed the existing materials (yes, all of them) and reviewed them as a single body of knowledge. For the first pass, I removed only information that was clearly incorrect or tied to an implementation that had already ended. The goal wasn't yet to decide what the new artitecture should be. It was to understand what employees were currently expected to navigate.
 
+<Figure
+	src="/portfolio/knowledge-base-architecture/content-inventory.png"
+	alt="Illustrative example of the content inventory spreadsheet."
+	caption="The inventory tracked where resources lived; reviewing the materials together expoed how the information itself had become fragmented."
+	width="35rem"
+/>
 
+### The same answer existed in multiple versions
+
+The audit revealed policy, procedure, system instructions, business rationale, scripting, and implementation guidance intermixed across resources created for different purposes and at different times.
+
+In some cases, those resources directly contradicted one another.
+
+One older guide, for example, instructed clinic staff to contact the Help Desk to remove a saved card from a patient's account. That had once been correct. System functionality and policy later changed to allow front-line staff to remove cards under defined circumstances, but the old guide remained available.
+
+Both answers effectively existed in the knowledge base, with no clear indication of which one was authoritative.
+
+### Workarounds were creating new problems
+
+The document audit showed me what information existed. Conversations with clinic staff and franchisees show me how people were actually coping with it.
+
+Rather than asking what new resources they wanted, I asked variations of a simpler question:
+
+<Callout> How are you coping? </Callout>
+
+Staff described relying on people they knew could answer questions, developing local ways of working, and keeping printed reference materials at the front desk.
+
+The binders made sense. When an employee needed an answer with a patient standing in front of them, flipping through a familiar binder would be faster than figuring our which digital system might contain the right resource.
+
+But the workaround created another failure point. Once a centrally maintained resource was printed, it became an uncontrolled local copy. The digital resource could change while the version being used in the clinic remained frozen in time.
+
+<Flow
+	items={[
+		{
+			description: "Hard to locate authoritative answer"
+		},
+		{
+			description: "Print useful resources"
+		},
+		{
+			description: "Build local reference binder"
+		},
+		{
+			description: "Central resource changes"
+		},
+		{
+			description: "Printed copy doesn't"
+		},
+		{
+			description: "Outdated guidance remains in use"
+		}
+	]}
+/>
+
+### The problem wsan't individual documents
+
+Other signals pointed in the same direction. Operational questions routed to the IT Help Desk had been increasing year over year for three years. Clinics developed inconsistent ways of performing basic business processes, and even field leadership could not always explain why a particular procedure was performed a particular way.
+
+The problem wasn't simply that some documents were outdated or poorly organized.
+
+**The organization lacked a shared architecture for operational knowledge:** where authoritative information lived, how different types of information related to one onther, how employees could identify the current source, and how obsolete information left the system.
+
+Updating the old materials would solve the immediate POS problem.
+
+It wouldn't solve the other one.
+
+## Designing the Model
+
+The first architectural decision was to separate operational knowledge according to its purpose, authority, and moment of use.
+
+A policy may need to stand independently in a legal proceeding. An SOP needs to explain how the business operates and why. A Quick Reference Guide (QRG) needs to help an employee complete a task, potentially with an upset patient standing in front of them.
+
+Trying to serve all three purposes in one resource would create lengthy documents that were difficult to maintain and even harder to use.
+
+I established levels of operational knowledge:
+
+<Timeline
+	items={[
+		{
+			title: "POLICY—What are the boundaries?",
+			description: "Authoratative requirements, permissions, and restrictions."
+		},
+		{
+			title: "SOP—What do we do, and why?",
+			description: "Repeatable business practices, operational workflows, and rationale."
+		},
+		{
+			title: "HOW-TO—How do I do it?",
+			description: "Task-specific instructions and demonstrations through QRGs and videos."
+		},
+		{
+			title: "TRAINING AND COMMUNICATIONS",
+			description: "Consume, contextualize, and reinforce authoratative information rather than independently defining the information."
+		}
+	]}
+/>
+
+This established a hiearchy of authority without requiring a rigid hierarchy of documents. A single procedure might reference several policies, while multiple How-To resources might support that same procedure.
+
+The structure also changed the role of Training and Communications. Rather than maintaining independent versions of operational knowledge, both could draw from a shared source: Training to build understanding and proficiency, and Communications to announce or reinforce changes.
+
+### Design Principles
+
+These principles provided a foundation for evaluating individual decisions. They also exposed the limitation of my initial approach: defining the types of resources was relatively straightforward, but defining how the information inside them related to one another was not.
+
+<EditorialCards
+	cards={[
+		{
+			title: "Every piece of knowledge has a job.",
+			description: "Structure information around its intended use, not simply where it has historically lived."
+		},
+		{
+			title: "Findability is part of correctness",
+			description: "An accurate answer has little value if employees cannot locate it when they need it."
+		},
+		{
+			title: "Design for recognition",
+			description: "Consistent templates, visual language, and document conventions should establish expectations before someone begins reading."
+		},
+		{
+			title: "Change once; propagate everwhere",
+			description: "Shared information should have an identifiable source and be reused rather than independently recreated."
+		},
+		{
+			title: "Design for evolution",
+			description: "Ownership, review, revision, and retirement are part of the system, not administrative tasks added afterward."
+		}
+	]}
+/>
+
+## Architecture
+
+The first version of the architecture organized information by **Process/Function > Atomic Workflow**, with an assumed relationship between each SOP and its supporting QRG.
+
+It worked for straightforward tasks. It became increasingly difficult to apply as the resource library expanded.
+
+For example, financing a purchase seemed to fit naturally under *Checkout Operations > Financing Options*. But where should a refund involving financing belong? Should it be treated as another financing workflow or part of transaction adjustments?
+
+The problem wasn't simply choosing better category names. I had designed a structure around individual workflows and their deliverabled, but operational knowledge crossed these boundaries.
+
+**The content types still worked. The relationships between them didn't.**
+
+<Flow
+	items={[
+		{
+			title: "INITIAL MODEL",
+			description: "Process/Function > Atomic Workflow. Assumed relationship: 1 SOP to 1 QRG"
+		},
+		{
+			title: "WHAT BROKE",
+			description: "One SOP could require several QRGs. One QRG could support multiple procedures. Related information crossed workflow boundaries."
+		},
+		{
+			title: "REVISED MODEL",
+			description: "Business Capability > Family > Namespace. Namespaces contain related knowledge and multiple deliverables."
+		}
+	]}
+/>
+
+### A Taxonomy Built Around Business Capabilities
+
+I revised the taxonomy into three levels:
+
+<Timeline
+	items={[
+		{
+			title: "Business Capability",
+			description: "A business capability identifies a broad operational function."
+		},
+		{
+			title: "Family",
+			description: "Famillies organize related activities within a capability."
+		},
+		{
+			title: "Namespace",
+			description: "Namespaces establish bounded areas of knowledge that can contain multiple resources and reusable information components."
+		}
+	]}
+/>
+
+For example:
+
+#### Checkout Operations
+
+<Flow
+	variant="tree"
+	items={[
+		{
+			title: "Transaction Processing",
+			children: [
+				{
+					title: "Financing Transactions",
+					children: [
+						{ title: "2 SOPs" },
+						{ title: "3 QRGs" },
+						{ title: "5 Videos" }
+					]
+				}
+			]
+		},
+		{ title: "Transaction Adjustments" },
+		{ title: "Refunds and Voids" }
+	]}
+/>
+
+This made the structure more flexible without sacrificing predicatability. Financing transactions could contain several procedures and supporting resources, while refunds and voids retained their own logical location regardless of the original payment method.
+
+Every resource also receives a catalog ID encoding its position within the taxonomy.
+
+For example, QRG_CO-105-01 identifies a Quick Reference Guide (QRG) in Checkout Operations (CO), within the Transaction Processing family (1##) and Financing Transactions namespace (#05). The final number identifies its creation sequence within that resource type and namespace.
+
+The same system applies to the underlying knowledge components, such as PRC_CO-105-01 for a procedure.
+
+### Knoweldge as Reusable Components
+
+The more consequential change was separating knowledge from the documents used to present it.
+
+Instead of treating an SOP or QRG as an isolated container of information, I developed a model of discrete knowledge packets. Each packet has a defined type, unique identity, and metadata describing its ownership, lifecycle, and relationships.
+
+Packet types include procedures, policies, requirements, references, warnings, decision points, checklists, troubleshooting guidance, examples, and other informational elements.
+
+A single resource can combine multiple packets, while the same packet can be referenced or reused across different resources.
+
+
+<CalloutFrame>
+Consider a membership cancellation:
+
+**KNOWLEDGE PACKETS**
+- PRC_PM-101-01—POS cancellation procedure
+- REF_PM-101-01—Cancellation types
+- REF_PM-101-02—Cancellation reasons
+- INF_PM-101-01—Reporting exception
+- WRN_PM-101-01—Minimum obligation warning
+- POL_PM-101-01—Cancellation Policy
+
+**PRESENTATION**
+
+*Cancelling a Plan (QRG)*
+
+Uses the POS procedure, reporting note, warning, and selected reference information.
+
+*Cancellations (SOP)*
+
+Uses cancellation types, reasons, reporting guidance, warnings, and relevant policy context, alongside the boarder business workflow.
+
+*Cancellation Policy*
+
+Presents the authorative policy information.
+</CalloutFrame>
+
+The QRG provides enough context to execute the task. The SOP explains the broader business workflow and decisions. The Policy establishes the authoritative requirements.
+
+The information overlaps because the work overlaps. The architecture makes those relationships explicit without requiring every document to independently own the same information.
+
+### Purpose-Specific Presentation
+
+The underlying knowledge model supports different forms of presentation.
+
+SOPs follow a repeatable structure that can include purpose, applicable policy, roles, preconditions, workflow steps, decision points, exceptions, and related resources.
+
+QRGs are narrower and task-oriented, with titles such as *Cancelling a Plan, Processing a Payment,* or *Interpreting Patient Flags*. Videos demonstrate execution visually.
+
+I developed standardized templates in InDesign and structured authoring styles in InCopy to support these distinctions. Document types use recognizable layouts, naming conventions, identifiers, and visual treatments.
+
+The goal is for employee to recognize the kind of information they are looking at before they need to interpret its contents.

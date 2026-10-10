@@ -6,6 +6,8 @@ import Button from '../components/navigation/Button.astro';
 import ButtonGroup from '../components/navigation/ButtonGroup.astro';
 import CalloutFrame from '../components/layout/CalloutFrame.astro';
 import Callout from '../components/content/Callout.astro';
+import MetricCallout from '../components/content/MetricCallout.astro';
+import EditorialCards from '../components/content/EditorialCards.astro';
 
 const colors = [
   {
@@ -148,43 +150,31 @@ const colors = [
         </div>
       </div>
 
-      <div class="principle-grid">
-        <article class="principle principle-steel">
-          <span class="principle-number">01</span>
-          <h3>Structured</h3>
-          <p>
-            Information should feel intentionally organized without becoming
-            rigid, bureaucratic, or visually dense.
-          </p>
-        </article>
-
-        <article class="principle principle-sage">
-          <span class="principle-number">02</span>
-          <h3>Clear</h3>
-          <p>
-            Visual hierarchy should help people understand where they are,
-            what matters, and what they can do next.
-          </p>
-        </article>
-
-        <article class="principle principle-plum">
-          <span class="principle-number">03</span>
-          <h3>Human</h3>
-          <p>
-            Technical precision should coexist with warmth, curiosity, and
-            respect for the person using the system.
-          </p>
-        </article>
-
-        <article class="principle principle-gold">
-          <span class="principle-number">04</span>
-          <h3>Constructed</h3>
-          <p>
-            Components should visibly relate to one another, suggesting
-            architecture, modularity, and thoughtful assembly.
-          </p>
-        </article>
-      </div>
+      <EditorialCards
+        ariaLabel="Brand principles"
+        cards={[
+          {
+            number: '01',
+            title: 'Structured',
+            description: 'Information should feel intentionally organized without becoming rigid, bureaucratic, or visually dense.',
+          },
+          {
+            number: '02',
+            title: 'Clear',
+            description: 'Visual hierarchy should help people understand where they are, what matters, and what they can do next.',
+          },
+          {
+            number: '03',
+            title: 'Human',
+            description: 'Technical precision should coexist with warmth, curiosity, and respect for the person using the system.',
+          },
+          {
+            number: '04',
+            title: 'Constructed',
+            description: 'Components should visibly relate to one another, suggesting architecture, modularity, and thoughtful assembly.',
+          },
+        ]}
+      />
     </section>
 
     <section id="colors" class="system-section">
@@ -318,6 +308,17 @@ const colors = [
         <Callout>
           Good learning design gives people the clarity and confidence to put knowledge into practice.
         </Callout>
+      </CalloutFrame>
+
+      <CalloutFrame theme="plum" surface="tinted">
+        <MetricCallout
+          items={[
+            { value: '07', label: 'Modules delivered' },
+            { value: '~2 HR', label: 'Total learning' },
+            { value: 'ON TIME', label: 'Schedule' },
+            { value: 'ON BUDGET', label: 'Delivery' },
+          ]}
+        />
       </CalloutFrame>
     </section>
 
@@ -609,77 +610,6 @@ const colors = [
     font-size: var(--font-size-sm);
   }
 
-  /* Principles */
-
-  .principle-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--space-lg);
-  }
-
-  .principle {
-    min-height: 14rem;
-    padding: clamp(1.5rem, 4vw, 2.75rem);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .principle:nth-child(1) {
-    grid-column: span 7;
-  }
-
-  .principle:nth-child(2) {
-    grid-column: span 5;
-    margin-top: var(--space-xl);
-  }
-
-  .principle:nth-child(3) {
-    grid-column: span 5;
-  }
-
-  .principle:nth-child(4) {
-    grid-column: span 7;
-    margin-top: calc(var(--space-xl) * -1);
-  }
-
-  .principle-steel {
-    background: var(--color-steel-100);
-  }
-
-  .principle-sage {
-    background: var(--color-sage-100);
-  }
-
-  .principle-plum {
-    background: var(--color-plum-100);
-  }
-
-  .principle-gold {
-    background: var(--color-gold-100);
-  }
-
-  .principle-number {
-    display: block;
-    margin-bottom: var(--space-2xl);
-    color: var(--color-granite-600);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-  }
-
-  .principle h3 {
-    font-family: var(--font-display);
-    font-size: clamp(1.7rem, 4vw, 2.5rem);
-    font-variation-settings:
-      "SOFT" 60,
-      "WONK" 1,
-      "opsz" 48;
-  }
-
-  .principle p {
-    max-width: 34rem;
-    color: var(--color-text-muted);
-  }
-
   /* Colors */
 
   .color-groups {
@@ -863,13 +793,6 @@ const colors = [
       max-width: 24rem;
     }
 
-    .principle:nth-child(1),
-    .principle:nth-child(2),
-    .principle:nth-child(3),
-    .principle:nth-child(4) {
-      grid-column: span 6;
-      margin-top: 0;
-    }
   }
 
   @media (max-width: 45rem) {
@@ -890,19 +813,8 @@ const colors = [
       margin-bottom: calc(var(--space-sm) * -1);
     }
 
-    .principle-grid,
     .card-grid {
       grid-template-columns: 1fr;
-    }
-
-    .principle:nth-child(n) {
-      grid-column: auto;
-      min-height: auto;
-      margin-top: 0;
-    }
-
-    .principle-number {
-      margin-bottom: var(--space-lg);
     }
 
     .specimen-label {
